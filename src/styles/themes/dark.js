@@ -27,5 +27,10 @@ export default {
 
       error: 'rgba(243, 80, 52, 1)',
     },
+
+    buttons: {
+      liked: 'rgba(242, 65, 50, 1)',
+      disliked: 'rgba(255, 255, 255, 1)',
+    },
   },
 }
