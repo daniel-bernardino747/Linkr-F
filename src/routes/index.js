@@ -1,0 +1,10 @@
+import React, { useContext } from 'react'
+
+import AuthContext from '../contexts/auth'
+import PrivateRoutes from './private.routes'
+import PublicRoutes from './public.routes'
+
+export default function Routes() {
+  const { signed } = useContext(AuthContext)
+  return signed ? <PrivateRoutes /> : <PublicRoutes />
+}
