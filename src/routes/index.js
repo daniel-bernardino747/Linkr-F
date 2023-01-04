@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import AuthContext from '../contexts/auth'
+import AuthContext from '../contexts/auth.context'
 import PrivateRoutes from './private.routes'
 import PublicRoutes from './public.routes'
 
