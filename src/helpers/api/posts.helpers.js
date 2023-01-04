@@ -1,4 +1,4 @@
-import { likePost } from '../../services/api/post.services'
+import { hashtag, likePost } from '../../services/api/post.services'
 
 async function like({ id, token }) {
   const config = {
@@ -17,7 +17,20 @@ async function like({ id, token }) {
     body: httpResponse.data,
   }
 }
+async function viewTag({ name }) {
+  let httpResponse
+  try {
+    httpResponse = await hashtag(name)
+  } catch (error) {
+    httpResponse = error.response
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
 
 export const postHelpers = {
   like,
+  viewTag,
 }
