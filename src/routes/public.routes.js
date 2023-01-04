@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import PublicPage from '../components/PublicPage'
+import PublicPage from '../components/Public'
 import Home from '../pages/Home'
 
 export default function PublicRoutes() {

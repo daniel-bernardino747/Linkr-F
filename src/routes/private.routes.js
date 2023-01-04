@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import PrivatePages from '../components/PrivatePages'
+import PrivatePages from '../components/Private'
 import SignIn from '../pages/Login'
 import SignUp from '../pages/SignUp'
 
