@@ -1,6 +1,15 @@
 import styled from 'styled-components'
 
-export const Button = styled.div`
+export const ContainerText = styled.div``
+export const Text = styled.span``
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const IconHeart = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
