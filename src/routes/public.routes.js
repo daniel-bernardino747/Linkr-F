@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 
 import PublicPage from '../components/Public'
 
-
 import SignIn from '../pages/Login'
 import SignUp from '../pages/SignUp/index'
 
