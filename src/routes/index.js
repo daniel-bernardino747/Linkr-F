@@ -6,5 +6,5 @@ import PublicRoutes from './public.routes'
 
 export default function Routes() {
   const { signed } = useContext(AuthContext)
-  return signed ? <PrivateRoutes /> : <PublicRoutes />
+  return signed ? <PublicRoutes /> : <PrivateRoutes />;
 }
