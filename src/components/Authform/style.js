@@ -4,7 +4,7 @@ export const ContainerForm = styled.div`
     display: flex;
     width: 100vw;
 `
-export const ContainerAuthForm = styled.div`
+export const ContainerAuthForm = styled.form`
     width: 30%;
     height: 100vh;
     background-color: #333333;
@@ -20,7 +20,7 @@ export const InputCamp = styled.input`
     border-radius: 6px;
     margin-bottom:13px;
 `
-export const ButtonCamp = styled.button`
+export const ButtonCamp = styled.input.attrs({ type: 'submit' })`
     width: 429px;
     height: 65px;
     background: #1877F2;
