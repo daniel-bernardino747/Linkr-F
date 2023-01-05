@@ -1,31 +1,34 @@
 import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 import Snippet from '../Snippet'
+import axios from 'axios'
 
 export default function Timeline() {
-  //  const [loading, setLoading] = useState(true)
-  //  const [posts, setPosts] = useState([])
+  //const [loading, setLoading] = useState(true)
+  const [posts, setPosts] = useState([])
 
-  /*   
   function getPosts() {
     const promise = axios.get('http://localhost:5000/posts')
     promise.then((res) => {
-      setLoading(false)
+      //setLoading(false)
       setPosts(res.data)
+      console.log(res.data)
     })
     promise.catch((err) => {
-      const confirm = window.confirm(
+      console.log(err)
+    /*const confirm = window.confirm(
         'An error occured while trying to fetch the posts, please refresh the page'
       )
       if (confirm) {
         window.location.reload()
-      }
+      } */
     })
   }
 
-  useEffect(getPosts, []);
-  */
+  useEffect(getPosts, [])
 
-  const posts = [
+  /*const posts = [
     {
       image:
         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
@@ -52,7 +55,7 @@ export default function Timeline() {
       urlImage:
         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
     },
-  ]
+  ]*/
 
   return (
     <>
