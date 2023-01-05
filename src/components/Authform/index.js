@@ -2,11 +2,14 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { isEmail } from 'validator'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ContainerAuthForm, InputCamp, ButtonCamp } from './style'
+import { signup, signin } from '../../services/api/post.services';
 
-export default function AuthForm({ signUp}) {
+export default function AuthForm({ signUp }) {
 
+  const navigate = useNavigate();
   const { register, handleSubmit, formState } = useForm();
   const { isSubmitting, errors } = formState;
 
@@ -16,7 +19,29 @@ export default function AuthForm({ signUp}) {
   const notSubmitting = typeForm ? 'Sign Up' : 'Log In';
 
   function onSubmit(data) {
-    console.log(data);
+    return new Promise((resolve) => {
+
+      if (typeForm) {
+        signup(data).then((sucess) => {
+          if (sucess) {
+            navigate('/');
+          }
+          resolve();
+        }).catch((error) =>{
+          console.log(error);
+        });
+      } else {
+        signin(data).then((sucess) => {
+          if (sucess) {
+            console.log(sucess);
+            navigate('/');
+          }
+          resolve();
+        }).catch((error) =>{
+          console.log(error);
+        });
+      }
+    })
   }
 
   return (
@@ -46,7 +71,7 @@ export default function AuthForm({ signUp}) {
           <InputCamp
             type="text"
             placeholder='username'
-            {...register("username", { required: true })}
+            {...register("name", { required: true })}
           />
           {errors?.username?.type === 'required' && (<p>Name is required.</p>)}
         </div>
@@ -58,7 +83,7 @@ export default function AuthForm({ signUp}) {
           <InputCamp
             type="text"
             placeholder='picture url'
-            {...register("pictureUrl", { required: true })}
+            {...register("image", { required: true })}
           />
           {errors?.pictureUrl?.type === 'required' && (<p>Picture url is required.</p>)}
         </div>
@@ -73,15 +98,15 @@ export default function AuthForm({ signUp}) {
 
 
       {!typeForm && (
-      <Link style={{ textDecoration: 'none' }} to="/signup">
-        <p>First time? Create an account!</p>
-      </Link>
+        <Link style={{ textDecoration: 'none' }} to="/signup">
+          <p>First time? Create an account!</p>
+        </Link>
       )}
 
-      {typeForm && (  
-      <Link style={{ textDecoration: 'none' }} to="/">
-        <p>Switch back to log in</p>
-      </Link>
+      {typeForm && (
+        <Link style={{ textDecoration: 'none' }} to="/">
+          <p>Switch back to log in</p>
+        </Link>
       )}
 
     </ContainerAuthForm>
