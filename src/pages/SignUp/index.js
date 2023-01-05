@@ -8,7 +8,7 @@ export default function SignUp() {
     <>
       <ContainerForm>
         <MensagePublic />
-        <AuthForm signUp/>
+        <AuthForm signUp />
       </ContainerForm>
     </>
   )

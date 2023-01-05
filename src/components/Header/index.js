@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { ContHeader } from './style'
 
 export default function Header() {
