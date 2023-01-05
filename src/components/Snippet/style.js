@@ -30,8 +30,10 @@ export const ContIcons = styled.div`
 `
 
 export const Content = styled.div`
+  height: 75px;
   h1 {
-    margin-bottom: 5px;
+    font-size: 19px;
+    margin-bottom: 0px;
   }
 `
 

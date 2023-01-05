@@ -5,9 +5,9 @@ import TextPost from '../TextPost'
 import { Banner, Content, ContIcons, ContTimeline } from './style'
 
 export default function Snippet(props) {
-  const { image, name, text, urlTitle, urlDescription, urlLink, urlImage } =
+  const { image, name, urlTitle, urlDescription, urlLink, urlImage } =
     props
-
+  console.log(image)
   return (
     <ContTimeline>
       <ContIcons>
@@ -17,7 +17,7 @@ export default function Snippet(props) {
       <div>
         <Content>
           <h1>{name}</h1>
-          <TextPost>{text}</TextPost>
+          <TextPost />
         </Content>
         <Banner>
           <div>
