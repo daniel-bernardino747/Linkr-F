@@ -8,7 +8,7 @@ export default function PrivateRoutes() {
   return (
     <Routes>
       <Route path="/" element={<PrivatePages />}>
-      <Route index element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/user" element={<Home />} />
       </Route>
     </Routes>
