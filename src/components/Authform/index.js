@@ -3,16 +3,14 @@ import React from 'react'
 import { ContainerAuthForm, InputCamp, ButtonCamp } from './style'
 
 export default function AuthForm() {
-  return(
-    
+  return (
     <ContainerAuthForm>
       <InputCamp></InputCamp>
       <InputCamp></InputCamp>
       <InputCamp></InputCamp>
       <InputCamp></InputCamp>
 
-      <ButtonCamp/>
+      <ButtonCamp />
     </ContainerAuthForm>
-    
   )
 }
