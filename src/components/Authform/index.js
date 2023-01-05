@@ -1,8 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { isEmail } from 'validator'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { ContainerAuthForm, InputCamp, ButtonCamp } from './style'
 import { signup, signin } from '../../services/api/post.services';
@@ -33,8 +32,12 @@ export default function AuthForm({ signUp }) {
       } else {
         signin(data).then((sucess) => {
           if (sucess) {
-            console.log(sucess);
+            const user = JSON.stringify(sucess.data.user);
+            localStorage.setItem("token", sucess.data.token);
+            localStorage.setItem("user", user);
+
             navigate('/');
+            window.location.reload();
           }
           resolve();
         }).catch((error) =>{
@@ -67,26 +70,26 @@ export default function AuthForm({ signUp }) {
 
 
       {typeForm && (
-        <div>
+        <>
           <InputCamp
             type="text"
             placeholder='username'
             {...register("name", { required: true })}
           />
-          {errors?.username?.type === 'required' && (<p>Name is required.</p>)}
-        </div>
+          {errors?.name?.type === 'required' && (<p>Name is required.</p>)}
+        </>
       )}
 
 
       {typeForm && (
-        <div>
+        <>
           <InputCamp
             type="text"
             placeholder='picture url'
             {...register("image", { required: true })}
           />
-          {errors?.pictureUrl?.type === 'required' && (<p>Picture url is required.</p>)}
-        </div>
+          {errors?.image?.type === 'required' && (<p>Picture url is required.</p>)}
+        </>
       )}
 
 
