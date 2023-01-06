@@ -58,8 +58,8 @@ export default createGlobalStyle`
     width: 100vw;
     height: 100vh;
     color: ${(props) => props.theme.colors.text.primary};
-    font-weight: 400;
-    font-family: 'Lexend Deca', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     background: ${(props) => props.theme.colors.background};
   }
   .root {

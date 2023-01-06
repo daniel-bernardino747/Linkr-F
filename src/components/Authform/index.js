@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { isEmail } from 'validator'
 
 import { signup, signin } from '../../services/api/post.services'
-import { ContainerAuthForm, InputCamp, ButtonCamp } from './style'
+import { ContainerAuthForm, InputCamp, ButtonCamp, TextError, Text } from './style'
 
 export default function AuthForm({ signUp }) {
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ export default function AuthForm({ signUp }) {
         signup(data)
           .then((sucess) => {
             if (sucess) {
-              navigate('/')
+              navigate('/oauth/login')
             }
             resolve()
           })
@@ -38,8 +38,7 @@ export default function AuthForm({ signUp }) {
               localStorage.setItem('token', sucess.data.token)
               localStorage.setItem('user', user)
 
-              navigate('/oauth/login')
-              window.location.reload()
+              navigate('/')
             }
             resolve()
           })
@@ -60,17 +59,17 @@ export default function AuthForm({ signUp }) {
           validate: (value) => isEmail(value),
         })}
       />
-      {errors?.email?.type === 'required' && <p>Email is required.</p>}
-      {errors?.email?.type === 'validate' && <p>Email is invalid.</p>}
+      {errors?.email?.type === 'required' && <TextError>Email is required.</TextError>}
+      {errors?.email?.type === 'validate' && <TextError>Email is invalid.</TextError>}
 
       <InputCamp
         type="text"
         placeholder="password"
         {...register('password', { required: true, minLength: 3 })}
       />
-      {errors?.password?.type === 'required' && <p>Password is required.</p>}
+      {errors?.password?.type === 'required' && <TextError>Password is required.</TextError>}
       {errors?.password?.type === 'minLength' && (
-        <p>Password must have at least 3 characters.</p>
+        <TextError>Password must have at least 3 characters.</TextError>
       )}
 
       {typeForm && (
@@ -80,7 +79,7 @@ export default function AuthForm({ signUp }) {
             placeholder="username"
             {...register('name', { required: true })}
           />
-          {errors?.name?.type === 'required' && <p>Name is required.</p>}
+          {errors?.name?.type === 'required' && <TextError>Name is required.</TextError>}
         </>
       )}
 
@@ -92,7 +91,7 @@ export default function AuthForm({ signUp }) {
             {...register('image', { required: true })}
           />
           {errors?.image?.type === 'required' && (
-            <p>Picture url is required.</p>
+            <TextError>Picture url is required.</TextError>
           )}
         </>
       )}
@@ -104,13 +103,13 @@ export default function AuthForm({ signUp }) {
 
       {!typeForm && (
         <Link style={{ textDecoration: 'none' }} to="/oauth/register">
-          <p>First time? Create an account!</p>
+          <Text>First time? Create an account!</Text>
         </Link>
       )}
 
       {typeForm && (
         <Link style={{ textDecoration: 'none' }} to="/oauth/login">
-          <p>Switch back to log in</p>
+          <Text>Switch back to log in</Text>
         </Link>
       )}
     </ContainerAuthForm>
