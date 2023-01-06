@@ -9,5 +9,4 @@ export const ContHeader = styled.div`
     font-size: 49px;
     font-weight: 700;
   }
-
 `

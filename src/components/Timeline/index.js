@@ -1,15 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+
+import { api } from '../../services/api'
 import Snippet from '../Snippet'
-import axios from 'axios'
 
 export default function Timeline() {
   //const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([])
 
   function getPosts() {
-    const promise = axios.get('http://localhost:5000/posts')
+    const promise = api.get('/posts')
     promise.then((res) => {
       //setLoading(false)
       setPosts(res.data)
@@ -17,7 +18,7 @@ export default function Timeline() {
     })
     promise.catch((err) => {
       console.log(err)
-    /*const confirm = window.confirm(
+      /*const confirm = window.confirm(
         'An error occured while trying to fetch the posts, please refresh the page'
       )
       if (confirm) {
