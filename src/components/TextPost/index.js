@@ -22,7 +22,7 @@ export default function TextPost({ children, text }) {
     <S.Container>
       <ReactTagify colors="rgba(250, 250, 250, 1)" tagClicked={viewHashtag}>
         {text}
-{/*         “You might not think that #programmers! are #artists, but programming is
+        {/*         “You might not think that #programmers! are #artists, but programming is
         an extremely creative #profession. Its logic-based creativity”
         @JohnRomero */}
       </ReactTagify>

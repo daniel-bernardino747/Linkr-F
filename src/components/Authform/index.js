@@ -5,7 +5,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { isEmail } from 'validator'
 
 import { signup, signin } from '../../services/api/post.services'
-import { ContainerAuthForm, InputCamp, ButtonCamp, TextError, Text } from './style'
+import {
+  ContainerAuthForm,
+  InputCamp,
+  ButtonCamp,
+  TextError,
+  Text,
+} from './style'
 
 export default function AuthForm({ signUp }) {
   const navigate = useNavigate()
@@ -59,15 +65,21 @@ export default function AuthForm({ signUp }) {
           validate: (value) => isEmail(value),
         })}
       />
-      {errors?.email?.type === 'required' && <TextError>Email is required.</TextError>}
-      {errors?.email?.type === 'validate' && <TextError>Email is invalid.</TextError>}
+      {errors?.email?.type === 'required' && (
+        <TextError>Email is required.</TextError>
+      )}
+      {errors?.email?.type === 'validate' && (
+        <TextError>Email is invalid.</TextError>
+      )}
 
       <InputCamp
         type="text"
         placeholder="password"
         {...register('password', { required: true, minLength: 3 })}
       />
-      {errors?.password?.type === 'required' && <TextError>Password is required.</TextError>}
+      {errors?.password?.type === 'required' && (
+        <TextError>Password is required.</TextError>
+      )}
       {errors?.password?.type === 'minLength' && (
         <TextError>Password must have at least 3 characters.</TextError>
       )}
@@ -79,7 +91,9 @@ export default function AuthForm({ signUp }) {
             placeholder="username"
             {...register('name', { required: true })}
           />
-          {errors?.name?.type === 'required' && <TextError>Name is required.</TextError>}
+          {errors?.name?.type === 'required' && (
+            <TextError>Name is required.</TextError>
+          )}
         </>
       )}
 
