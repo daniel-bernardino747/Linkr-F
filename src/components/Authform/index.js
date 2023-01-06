@@ -23,7 +23,7 @@ export default function AuthForm({ signUp }) {
         signup(data)
           .then((sucess) => {
             if (sucess) {
-              navigate('/')
+              navigate('/oauth/login')
             }
             resolve()
           })
@@ -38,8 +38,7 @@ export default function AuthForm({ signUp }) {
               localStorage.setItem('token', sucess.data.token)
               localStorage.setItem('user', user)
 
-              navigate('/oauth/login')
-              window.location.reload()
+              navigate('/')
             }
             resolve()
           })
