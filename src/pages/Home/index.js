@@ -3,6 +3,7 @@ import React from 'react'
 import Like from '../../components/Like'
 import TextPost from '../../components/TextPost'
 import Trending from '../../components/Trending'
+import ModalComponent from '../../components/Modal'
 
 export default function Home() {
   const bla = [
@@ -19,6 +20,7 @@ export default function Home() {
         dasoidsa #doiasijdsa doasidhj
       </TextPost>
       <Trending hashtagList={bla} />
+      <ModalComponent />
     </>
   )
 }

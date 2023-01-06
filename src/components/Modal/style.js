@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
 export const Overlay = styled.div`
+  @keyframes open-linear-overlay {
+    to {
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+  }
   z-index: 2;
   position: fixed;
   top: 0;
@@ -9,10 +14,13 @@ export const Overlay = styled.div`
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
+  transition: linear;
+  background-color: rgba(255, 255, 255, 0);
   display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
+
+  animation: open-linear-overlay 0.3s forwards ease;
 `
 
 export const Title = styled.h1`
