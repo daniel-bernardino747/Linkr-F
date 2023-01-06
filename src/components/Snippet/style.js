@@ -45,6 +45,7 @@ export const Banner = styled.div`
   border: 1px solid #4d4d4d;
   border-radius: 5px;
   margin-top: 10px;
+  cursor: pointer;
 
   div {
     margin: 8px auto;

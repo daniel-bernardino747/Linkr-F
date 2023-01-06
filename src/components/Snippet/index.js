@@ -5,8 +5,8 @@ import TextPost from '../TextPost'
 import { Banner, Content, ContIcons, ContTimeline } from './style'
 
 export default function Snippet(props) {
-  const { image, name, urlTitle, urlDescription, urlLink, urlImage } = props
-  console.log(image)
+  const { image, name, text, urlTitle, urlDescription, urlLink, urlImage } =
+    props
   return (
     <ContTimeline>
       <ContIcons>
@@ -16,9 +16,9 @@ export default function Snippet(props) {
       <div>
         <Content>
           <h1>{name}</h1>
-          <TextPost />
+          <TextPost text={text} />
         </Content>
-        <Banner>
+        <Banner onClick={() => window.open(urlLink)}>
           <div>
             <h1>{urlTitle}</h1>
             <h2>{urlDescription}</h2>
