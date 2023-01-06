@@ -5,7 +5,7 @@ import React, { createContext, useState } from 'react'
 const AuthContext = createContext({})
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null) // buscar token no localstorage
+  const [user, setUser] = useState(localStorage.getItem('token')) // buscar token no localstorage
 
   async function signIn() {
     const response = { user: 'bla' } // await auth.signIn()

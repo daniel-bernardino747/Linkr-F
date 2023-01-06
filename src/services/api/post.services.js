@@ -14,3 +14,10 @@ export async function hashtag(name) {
 export async function deletePost(id) {
   return api.delete(`posts/${id}`)
 }
+export async function signup(obj) {
+  return api.post(`/signup`, obj)
+}
+
+export async function signin(obj) {
+  return api.post(`/signin`, obj)
+}

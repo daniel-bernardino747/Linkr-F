@@ -1,12 +1,16 @@
 import React from 'react'
 
 import AuthForm from '../../components/Authform'
+import { ContainerForm } from '../../components/Authform/style'
+import MensagePublic from '../../components/MensagePublic/index'
 
 export default function Login() {
   return (
     <>
-      <h1>Login</h1>
-      <AuthForm />
+      <ContainerForm>
+        <MensagePublic />
+        <AuthForm />
+      </ContainerForm>
     </>
   )
 }

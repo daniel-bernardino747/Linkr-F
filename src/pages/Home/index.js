@@ -1,26 +1,23 @@
 import React from 'react'
 
-import Like from '../../components/Like'
-import TextPost from '../../components/TextPost'
+//import Header from '../../components/Header'
+import PublishPost from '../../components/PublishPost'
+import Main from '../../components/Template/Main'
+import Timeline from '../../components/Timeline'
 import Trending from '../../components/Trending'
 import ModalComponent from '../../components/Modal'
 
 export default function Home() {
-  const bla = [
-    { id: 1, name: '1' },
-    { id: 2, name: '1' },
-    { id: 3, name: '1' },
-  ]
+  const bla = [{ id: 1, name: 'l' }]
+  //const data = JSON.parse(localStorage.getItem('user'))
   return (
-    <>
-      <h1>Home</h1>
-      <Like />
-      <TextPost>
-        Oii, primeira #hashtag asdoasid asdoiasjdn asdoiasdml sadoiasjdm asodias
-        dasoidsa #doiasijdsa doasidhj
-      </TextPost>
+    <Main title={'Timeline'}>
+      <div>
+        <PublishPost />
+        <Timeline />
+      </div>
       <Trending hashtagList={bla} />
       <ModalComponent />
-    </>
+    </Main>
   )
 }

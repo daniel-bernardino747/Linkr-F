@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.p`
-  padding: 0.5em 0;
-  line-height: 1.8em;
+  width: 520px;
+  padding: 0.3em 0;
+  line-height: 1.2em;
   span {
-    font-weight: 700;
-    text-decoration: underline;
-    cursor: pointer;
+    span {
+      span {
+        color: none;
+        font-weight: 700;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
 `
