@@ -12,12 +12,14 @@ export const ContainerMensage = styled.div`
 `
 
 export const Title = styled.div`
+  font-family: 'Passion One', cursive;
   font-style: normal;
   font-weight: 700;
   font-size: 106px;
 `
 
 export const Description = styled.div`
+  font-family: 'Oswald', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 43px;
