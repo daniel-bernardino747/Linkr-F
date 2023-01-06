@@ -1,5 +1,9 @@
 import { api } from './index'
 
+export async function postPublish(config) {
+  return api.post(`/posts`, config)
+}
+
 export async function likePost(id, config) {
   return api.post(`/${id}/like`, {}, config)
 }
