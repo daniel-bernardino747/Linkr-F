@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { postPublish } from '../../services/api/post.services'
 
+import { postPublish } from '../../services/api/post.services'
 import { Publish, Form } from './style'
 
 export default function PublishPost() {
@@ -16,8 +16,17 @@ export default function PublishPost() {
   )
 
   function submitForm(data) {
+    const arrText = data.text.split(' ')
+    const hashtags = arrText
+      .map((word) => {
+        if (word[0] === '#') {
+          return word.replace(/[.,;?!#@$%&*()]/gi, '')
+        }
+        return false
+      })
+      .filter((value) => value)
     return new Promise((resolve) =>
-      postPublish(data)
+      postPublish({ ...data, hashtags })
         .then((sucess) => {
           window.location.reload()
           console.log(sucess.data)
@@ -39,7 +48,7 @@ export default function PublishPost() {
           placeholder="http://..."
           {...register('url', {
             required: true,
-            validate: (value) => verifyUrl.test(value)
+            validate: (value) => verifyUrl.test(value),
           })}
         />
         {errors?.url?.type === 'required' && <p>Url is required.</p>}
