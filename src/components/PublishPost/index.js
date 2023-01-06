@@ -17,8 +17,7 @@ export default function PublishPost() {
     setMessage('Publishing...')
     console.log(bodyData)
 
-    /*
-    const promise = axios.post('http://localhost:5000/posts', bodyData)
+    const promise = axios.post('posts', bodyData)
     promise.then(() => {
       setBodyData({ url: '', text: '' })
       setDisable(false)
@@ -28,7 +27,6 @@ export default function PublishPost() {
       alert('Houve um erro ao publicar seu link')
       setDisable(false)
     })
-    */
   }
 
   function sendInput(e) {

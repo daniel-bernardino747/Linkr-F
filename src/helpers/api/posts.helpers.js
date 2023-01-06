@@ -30,10 +30,15 @@ async function viewTag({ name }) {
   }
 }
 
-async function del(id) {
+async function del(id, token) {
   let httpResponse
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  }
   try {
-    httpResponse = await deletePost(id)
+    httpResponse = await deletePost(id, config)
   } catch (error) {
     httpResponse = error.response
   }

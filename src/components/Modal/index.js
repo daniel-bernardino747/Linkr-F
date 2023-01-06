@@ -1,16 +1,15 @@
 import React from 'react'
-
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
-import { deletePost } from '../../services/api/post.services'
-
+import { postHelpers } from '../../helpers/api/posts.helpers'
+import AuthContext from '../../contexts/auth.context'
 import * as s from './style'
 
 export default function ModalComponent() {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [request, setRequest] = useState(true)
-
   const id = 1
+  const { user } = useContext(AuthContext)
 
   const openModal = () => {
     setIsOpen(true)
@@ -21,7 +20,7 @@ export default function ModalComponent() {
   }
 
   const confirmDelete = (id) => {
-    deletePost(id)
+    postHelpers.del(id, user).then(() => console.log('deletou'))
     setRequest(false)
   }
 
