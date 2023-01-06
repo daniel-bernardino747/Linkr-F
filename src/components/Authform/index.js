@@ -38,7 +38,7 @@ export default function AuthForm({ signUp }) {
               localStorage.setItem('token', sucess.data.token)
               localStorage.setItem('user', user)
 
-              navigate('/')
+              navigate('/oauth/login')
               window.location.reload()
             }
             resolve()
@@ -103,13 +103,13 @@ export default function AuthForm({ signUp }) {
       />
 
       {!typeForm && (
-        <Link style={{ textDecoration: 'none' }} to="/signup">
+        <Link style={{ textDecoration: 'none' }} to="/oauth/register">
           <p>First time? Create an account!</p>
         </Link>
       )}
 
       {typeForm && (
-        <Link style={{ textDecoration: 'none' }} to="/">
+        <Link style={{ textDecoration: 'none' }} to="/oauth/login">
           <p>Switch back to log in</p>
         </Link>
       )}

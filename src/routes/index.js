@@ -1,10 +1,29 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom'
 
-import AuthContext from '../contexts/auth.context'
-import PrivateRoutes from './private.routes'
-import PublicRoutes from './public.routes'
+import Hashtag from '../pages/Hashtag'
+import Home from '../pages/Home'
+import Login from '../pages/Login'
+import ProtectedLayout from '../pages/ProtectedLayout'
+import SignUp from '../pages/SignUp'
+import Root from './root.routes'
 
-export default function Routes() {
-  const { signed } = useContext(AuthContext)
-  return signed ? <PublicRoutes /> : <PrivateRoutes />
-}
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Root />}>
+      <Route path="/oauth/login" element={<Login />} />
+      <Route path="/oauth/register" element={<SignUp />} />
+
+      <Route path="/" element={<ProtectedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/user" element={<Home />} />
+        <Route path="/hashtag/:hashtag" element={<Hashtag />} />
+      </Route>
+    </Route>
+  )
+)
+export default router
