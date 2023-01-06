@@ -3,6 +3,12 @@ import styled from 'styled-components'
 export const ContainerForm = styled.div`
   display: flex;
   width: 100vw;
+  @media(max-width: 860px){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  };
 `
 export const ContainerAuthForm = styled.form`
   width: 30%;
@@ -12,9 +18,16 @@ export const ContainerAuthForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  @media(max-width: 860px){
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+  };
 `
 export const InputCamp = styled.input`
-  width: 429px;
+  width: 85%;
   height: 65px;
   background: #ffffff;
   border-radius: 6px;
@@ -26,9 +39,13 @@ export const InputCamp = styled.input`
   ::placeholder{
     color: #9f9f9f;
   }
+  @media(max-width: 860px){
+    width: 85%;
+    font-size: 22px;
+  };
 `
 export const ButtonCamp = styled.input.attrs({ type: 'submit' })`
-  width: 429px;
+  width: 85%;
   height: 65px;
   margin-top: 22px;
   background: #1877f2;
@@ -37,6 +54,10 @@ export const ButtonCamp = styled.input.attrs({ type: 'submit' })`
   font-weight: 700;
   font-size: 27px;
   color: #FFFFFF;
+  @media(max-width: 860px){
+    width: 85%;
+    font-size: 22px;
+  };
 `
 export const TextError = styled.p`
   margin-top: 5px;
