@@ -4,11 +4,13 @@ import { useState, useEffect, useContext } from 'react'
 import { api } from '../../services/api'
 import Snippet from '../Snippet'
 import AuthContext from '../../contexts/auth.context'
+import { Title } from './style'
+import { LineWave } from 'react-loader-spinner'
 
 export default function Timeline() {
-  //const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([])
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const config = {
     headers: {
       Authorization: 'Bearer ' + user,
@@ -17,13 +19,13 @@ export default function Timeline() {
   function getPosts() {
     const promise = api.get('/posts', config)
     promise.then((res) => {
-      //setLoading(false)
-      setPosts(res.data.posts)
-      console.log(res.data.posts)
+      setPosts(res.data)
+      setLoading(false)
     })
     promise.catch((err) => {
       console.log(err)
-      const confirm = window.confirm(
+      setLoading(false)
+      const confirm = window.alert(
         'An error occured while trying to fetch the posts, please refresh the page'
       )
       if (confirm) {
@@ -36,8 +38,11 @@ export default function Timeline() {
 
   return (
     <>
+      {posts.length === 0 && !loading && <Title>There are no posts yet</Title>}
+      {loading && <LineWave color="white" />}
       {posts.map((post, index) => {
-        const { image, name, text, urlDescription, url, urlImage, urlTitle } = post
+        const { image, name, text, urlDescription, url, urlImage, urlTitle } =
+          post
         return (
           <>
             <Snippet
