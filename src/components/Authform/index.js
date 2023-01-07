@@ -1,9 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { isEmail } from 'validator'
-
 import { signup, signin } from '../../services/api/post.services'
 import {
   ContainerAuthForm,
