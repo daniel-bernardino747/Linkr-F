@@ -25,3 +25,7 @@ export async function signup(obj) {
 export async function signin(obj) {
   return api.post(`/signin`, obj)
 }
+
+export async function logout(config) {
+  return api.delete(`/logout`, config)
+}

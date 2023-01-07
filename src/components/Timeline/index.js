@@ -1,18 +1,25 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
+import AuthContext from '../../contexts/auth.context'
 import { api } from '../../services/api'
 import Snippet from '../Snippet'
 
 export default function Timeline() {
   //const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([])
+  const { user } = useContext(AuthContext)
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + user,
+    },
+  }
   function getPosts() {
-    const promise = api.get('/posts')
+    const promise = api.get('/posts', config)
     promise.then((res) => {
       //setLoading(false)
-      setPosts(res.data)
-      //console.log(res.data)
+      setPosts(res.data.posts)
+      console.log(res.data.posts)
     })
     promise.catch((err) => {
       console.log(err)
