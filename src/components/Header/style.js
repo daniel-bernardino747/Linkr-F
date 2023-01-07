@@ -17,22 +17,19 @@ export const ContHeader = styled.div`
     font-weight: 700;
   }
 
-  img{
+  img {
     width: 53px;
     height: 53px;
     border-radius: 26.5px;
   }
-
 `
 export const Menu = styled.div`
-
   display: flex;
   align-items: center;
-
 `
 export const Opitions = styled.div`
   position: absolute;
-  top: 72px; 
+  top: 72px;
   right: 0;
   width: 120px;
   height: 47px;
@@ -44,5 +41,5 @@ export const Opitions = styled.div`
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #FFFFFF;
+  color: #ffffff;
 `

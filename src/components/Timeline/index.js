@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 
+import AuthContext from '../../contexts/auth.context'
 import { api } from '../../services/api'
 import Snippet from '../Snippet'
-import AuthContext from '../../contexts/auth.context'
 import { Title } from './style'
 import { LineWave } from 'react-loader-spinner'
 
