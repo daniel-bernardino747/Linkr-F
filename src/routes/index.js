@@ -5,8 +5,8 @@ import {
   Route,
 } from 'react-router-dom'
 
-import Hashtag from '../pages/Hashtag'
-import Home from '../pages/Home'
+import Hashtag, { loader as loaderHashtag } from '../pages/Hashtag'
+import Home, { loader as loaderHome } from '../pages/Home'
 import Login from '../pages/Login'
 import ProtectedLayout from '../pages/ProtectedLayout'
 import SignUp from '../pages/SignUp'
@@ -19,9 +19,13 @@ const router = createBrowserRouter(
       <Route path="/oauth/register" element={<SignUp />} />
 
       <Route path="/" element={<ProtectedLayout />}>
-        <Route index element={<Home />} />
+        <Route index element={<Home />} loader={loaderHome} />
         <Route path="/user" element={<Home />} />
-        <Route path="/hashtag/:hashtag" element={<Hashtag />} />
+        <Route
+          path="/hashtag/:hashtag"
+          element={<Hashtag />}
+          loader={loaderHashtag}
+        />
       </Route>
     </Route>
   )
