@@ -6,7 +6,7 @@ import { ReactTagify } from 'react-tagify'
 import * as S from './style'
 
 export default function TextPost({ children, text }) {
-  console.log(text)
+  //console.log(text)
   const viewHashtag = async (name) => {
     const statusOK = 200
     name = name.replace(/[.,;?!#@$%&*()]/gi, '')
