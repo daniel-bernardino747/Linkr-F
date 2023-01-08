@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Like from '../Like'
+import ModalComponent from '../Modal'
 import TextPost from '../TextPost'
-import { Banner, Content, ContIcons, ContTimeline } from './style'
+import {
+  Banner,
+  Content,
+  ContIcons,
+  ContTimeline,
+  IconsEditDelete,
+} from './style'
 
 export default function Snippet(props) {
   const { image, name, text, urlTitle, urlDescription, urlLink, urlImage } =
     props
+
+  const [modalIsOpen, setIsOpen] = useState(false)
   return (
     <ContTimeline>
       <ContIcons>
@@ -27,6 +36,9 @@ export default function Snippet(props) {
           <img src={urlImage} alt={urlImage} />
         </Banner>
       </div>
+      <IconsEditDelete>
+        <ModalComponent setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
+      </IconsEditDelete>
     </ContTimeline>
   )
 }

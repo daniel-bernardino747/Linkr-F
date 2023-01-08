@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
+import { BsFillTrashFill } from 'react-icons/bs'
 import { postHelpers } from '../../helpers/api/posts.helpers'
 import AuthContext from '../../contexts/auth.context'
 import * as s from './style'
 
-export default function ModalComponent() {
-  const [modalIsOpen, setIsOpen] = useState(false)
-  const [request, setRequest] = useState(true)
+export default function ModalComponent(props) {
+  const [loading, setLoading] = useState(false)
   const id = 1
   const { user } = useContext(AuthContext)
 
@@ -19,17 +19,49 @@ export default function ModalComponent() {
     setIsOpen(false)
   }
 
-  const confirmDelete = (id) => {
-    postHelpers.del(id, user).then(() => console.log('deletou'))
-    setRequest(false)
+  const confirmDelete = async (id) => {
+    // return new Promise((resolve) => {
+    //   postHelpers
+    //     .del(id, user)
+    //     .then((sucess) => {
+    //       setLoading(true)
+    //       console.log(sucess)
+    //       resolve()
+    //       setLoading(false)
+    //       closeModal()
+    //     })
+    //     .catch((error) => {
+    //       alert('Error', error)
+    //     })
+    // })
+    try {
+      setLoading(true)
+      const response = await postHelpers.del(id, user)
+      console.log(response)
+      setLoading(false)
+      if (response.statusData === 401) {
+        return alert('Não autorizado')
+      }
+    } catch (e) {
+      console.log(e)
+      alert('Falha ao deletar')
+    }
   }
 
   return (
     <>
-      <button onClick={openModal}>Open Modal</button>
+      <BsFillTrashFill onClick={openModal} />
       <s.Overlay isOpen={modalIsOpen}>
         <s.Container>
-          {request ? (
+          {loading ? (
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="3"
+              animationDuration="0.75"
+              width="60"
+              visible={true}
+            />
+          ) : (
             <>
               <s.Title>Are you sure you want to delete this post?</s.Title>
               <div>
@@ -39,14 +71,6 @@ export default function ModalComponent() {
                 </s.ButtonDelete>
               </div>
             </>
-          ) : (
-            <RotatingLines
-              strokeColor="grey"
-              strokeWidth="3"
-              animationDuration="0.75"
-              width="60"
-              visible={true}
-            />
           )}
         </s.Container>
       </s.Overlay>

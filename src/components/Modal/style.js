@@ -71,3 +71,4 @@ export const ButtonDelete = styled.button`
   border-radius: 0.4em;
   cursor: pointer;
 `
+export const Icon = styled.div``
