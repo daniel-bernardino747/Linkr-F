@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import AuthContext from '../../contexts/auth.context'
-//import { postHelpers } from '../../helpers/api/posts.helpers'
 
+import AuthContext from '../../contexts/auth.context'
 import { postPublish } from '../../services/api/post.services'
 import { Publish, Form } from './style'
+//import { postHelpers } from '../../helpers/api/posts.helpers'
 
 export default function PublishPost() {
   //Token do login
@@ -15,8 +15,8 @@ export default function PublishPost() {
     },
   }
 
-  const userData = localStorage.getItem('user')
-  const data = JSON.parse(userData)
+  // const userData = localStorage.getItem('user')
+  // const data = JSON.parse(userData)
 
   const { register, handleSubmit, formState } = useForm()
   const { isSubmitting, errors } = formState
@@ -55,7 +55,7 @@ export default function PublishPost() {
 
   return (
     <Publish>
-      <img src={data.image} alt="profileImg" />
+      {/* {data.image && <img src={data.image} alt="profileImg" />} */}
       <Form onSubmit={handleSubmit(submitForm)}>
         <p>What are you going to share today?</p>
         <input
