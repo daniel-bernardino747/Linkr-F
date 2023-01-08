@@ -73,6 +73,8 @@ export const Banner = styled.div`
   img {
     height: 153px;
     width: 153px;
+    border-left: 1px solid #4d4d4d;
+    border-radius: 5px;
   }
 `
 export const IconsEditDelete = styled.div`

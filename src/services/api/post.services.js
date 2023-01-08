@@ -1,7 +1,7 @@
 import { api } from './index'
 
-export async function postPublish(config) {
-  return api.post(`/posts`, config)
+export async function postPublish(obj, config) {
+  return api.post(`/posts`, obj, config)
 }
 
 export async function likePost(id, config) {

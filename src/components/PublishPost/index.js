@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 
+import AuthContext from '../../contexts/auth.context'
 import { postPublish } from '../../services/api/post.services'
 import { Publish, Form } from './style'
+//import { postHelpers } from '../../helpers/api/posts.helpers'
 
 export default function PublishPost() {
-  const data = {
-    image:
-      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+  //Token do login
+  const { user } = useContext(AuthContext)
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + user,
+    },
   }
+
+  // const userData = localStorage.getItem('user')
+  // const data = JSON.parse(userData)
+
   const { register, handleSubmit, formState } = useForm()
   const { isSubmitting, errors } = formState
   const verifyUrl = new RegExp(
@@ -26,10 +35,11 @@ export default function PublishPost() {
       })
       .filter((value) => value)
     return new Promise((resolve) =>
-      postPublish({ ...data, hashtags })
+      postPublish({ ...data, hashtags }, config)
         .then((sucess) => {
-          window.location.reload()
           console.log(sucess.data)
+          console.log(data)
+          window.location.reload()
           resolve()
         })
         .catch((error) => {
@@ -38,9 +48,14 @@ export default function PublishPost() {
     )
   }
 
+  /*   const handlePublish = () => {
+    const result = postHelpers.publish(data.id, user)
+    return result
+  } */
+
   return (
     <Publish>
-      <img src={data.image} alt="profileImg" />
+      {/* {data.image && <img src={data.image} alt="profileImg" />} */}
       <Form onSubmit={handleSubmit(submitForm)}>
         <p>What are you going to share today?</p>
         <input

@@ -1,55 +1,44 @@
 import React from 'react'
-import { useParams } from 'react-router'
+import { useLoaderData } from 'react-router'
 
 import Snippet from '../../components/Snippet'
 import Main from '../../components/Template/Main'
 import Trending from '../../components/Trending'
-import { postHelpers } from '../../helpers/api/posts.helpers'
+import { hashtag } from '../../services/api/post.services'
 
-export const loader = async () => {
-  const { hashtag: name } = useParams()
-  const posts = await postHelpers.viewTag({ name })
-  console.log(posts)
+export const loader = async ({ params }) => {
+  const { hashtag: name } = params
+  const {
+    data: { posts, hashtags },
+  } = await hashtag(name)
 
   return {
     posts,
-    hashtag: name,
+    title: name,
+    hashtags,
   }
 }
 
 export default function Hashtag() {
-  // const { hashtag, posts } = useLoaderData()
-  const bla = [{ id: 1, name: 'l' }]
-  const { hashtag } = useParams()
-  const posts = []
+  const { title, posts, hashtags } = useLoaderData()
+  console.log(posts)
   return (
-    <Main title={hashtag}>
+    <Main title={title}>
       <div>
-        {posts?.map((post, index) => {
-          const {
-            image,
-            name,
-            text,
-            urlDescription,
-            urlLink,
-            urlImage,
-            urlTitle,
-          } = post
-          return (
-            <Snippet
-              key={index}
-              image={image}
-              name={name}
-              text={text}
-              urlTitle={urlTitle}
-              urlDescription={urlDescription}
-              urlLink={urlLink}
-              urlImage={urlImage}
-            />
-          )
-        })}
+        {posts?.map((post) => (
+          <Snippet
+            key={post.id}
+            image={post.image}
+            name={post.name}
+            text={post.text}
+            urlTitle={post.urlTitle}
+            urlDescription={post.urlDescription}
+            urlLink={post.urlLink}
+            urlImage={post.urlImage}
+          />
+        ))}
       </div>
-      <Trending hashtagList={bla} />
+      <Trending hashtagList={hashtags} />
     </Main>
   )
 }
