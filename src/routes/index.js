@@ -10,6 +10,7 @@ import Home, { loader as loaderHome } from '../pages/Home'
 import Login from '../pages/Login'
 import ProtectedLayout from '../pages/ProtectedLayout'
 import SignUp from '../pages/SignUp'
+import User, { loader as loaderUser } from '../pages/User'
 import Root from './root.routes'
 
 const router = createBrowserRouter(
@@ -20,7 +21,7 @@ const router = createBrowserRouter(
 
       <Route path="/" element={<ProtectedLayout />}>
         <Route index element={<Home />} loader={loaderHome} />
-        <Route path="/user" element={<Home />} />
+        <Route path="/users/:id" element={<User />} loader={loaderUser} />
         <Route
           path="/hashtag/:hashtag"
           element={<Hashtag />}

@@ -4,18 +4,27 @@ import Like from '../Like'
 import TextPost from '../TextPost'
 import { Banner, Content, ContIcons, ContTimeline } from './style'
 
-export default function Snippet(props) {
-  const { image, name, text, urlTitle, urlDescription, urlLink, urlImage } =
-    props
+export default function Snippet({
+  id,
+  text,
+  likes,
+  image,
+  urlLink,
+  username,
+  urlTitle,
+  urlImage,
+  userLiked,
+  urlDescription,
+}) {
   return (
     <ContTimeline>
       <ContIcons>
         <img src={image} alt={image} />
-        <Like />
+        <Like id={id} likes={likes} liked={userLiked} />
       </ContIcons>
       <div>
         <Content>
-          <h1>{name}</h1>
+          <h1>{username}</h1>
           <TextPost text={text} />
         </Content>
         <Banner onClick={() => window.open(urlLink)}>

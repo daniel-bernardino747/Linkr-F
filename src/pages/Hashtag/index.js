@@ -8,9 +8,14 @@ import { hashtag } from '../../services/api/post.services'
 
 export const loader = async ({ params }) => {
   const { hashtag: name } = params
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
+    },
+  }
   const {
     data: { posts, hashtags },
-  } = await hashtag(name)
+  } = await hashtag(name, config)
 
   return {
     posts,
@@ -26,16 +31,7 @@ export default function Hashtag() {
     <Main title={title}>
       <div>
         {posts?.map((post) => (
-          <Snippet
-            key={post.id}
-            image={post.image}
-            name={post.name}
-            text={post.text}
-            urlTitle={post.urlTitle}
-            urlDescription={post.urlDescription}
-            urlLink={post.urlLink}
-            urlImage={post.urlImage}
-          />
+          <Snippet key={post.id} {...post} />
         ))}
       </div>
       <Trending hashtagList={hashtags} />

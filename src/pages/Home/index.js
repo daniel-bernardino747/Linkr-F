@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 
-//import Header from '../../components/Header'
 import Header from '../../components/Header'
 import PublishPost from '../../components/PublishPost'
 import Main from '../../components/Template/Main'
@@ -13,7 +12,7 @@ import { ContainerHome } from './style'
 export const loader = async () => {
   const config = {
     headers: {
-      Authorization: 'Bearer ' + 'b8bbb8dd-bac3-4d2c-97b7-bac4639025f3',
+      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
     },
   }
   try {
