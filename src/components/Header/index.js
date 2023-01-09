@@ -9,8 +9,8 @@ import { ContHeader, Menu, Opitions } from './style'
 
 export default function Header() {
   const navigate = useNavigate()
-  const userSerializada = localStorage.getItem('user')
-  const userInfo = JSON.parse(userSerializada)
+  // const userSerializada = localStorage.getItem('user')
+  // const userInfo = JSON.parse(userSerializada)
   const [status, setStatus] = useState(false)
   const { user } = useContext(AuthContext)
 
@@ -58,7 +58,7 @@ export default function Header() {
             />
           )}
 
-          <img src={userInfo.image} onClick={flipMenu} />
+          {/* <img src={userInfo.image} onClick={flipMenu} /> */}
         </Menu>
         {!status && <Opitions onClick={logOut}>Logout</Opitions>}
       </ContHeader>
