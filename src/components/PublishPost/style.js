@@ -16,6 +16,22 @@ export const Publish = styled.div`
     height: 50px;
     border-radius: 30px;
   }
+
+  @media (max-width: 1024px) {
+    width: 55vw;
+    font-size: 22px;
+  }
+
+  @media (max-width: 860px) {
+    border-radius: 0;
+    width: 100vw;
+    height: 190px;
+
+    img {
+      width: 45px;
+      height: 45px;
+    }
+  } ;
 `
 export const Form = styled.form`
   width: 88%;
@@ -24,7 +40,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  padding-left: 20px;
+  padding-left: 10px;
 
   p {
     width: 100%;
@@ -48,7 +64,7 @@ export const Form = styled.form`
   }
 
   input:nth-child(3) {
-    margin: 7px 0;
+    margin: 10px 0;
     height: 66px;
   }
 
@@ -63,5 +79,22 @@ export const Form = styled.form`
     border-radius: 5px;
     background-color: #1877f2;
     cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    width: 85%;
+
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    width: 90%;
+    margin-right: 5px;
+
+    p {
+      font-size: 16px;
+    }
   }
 `
