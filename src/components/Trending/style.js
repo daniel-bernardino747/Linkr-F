@@ -13,6 +13,14 @@ export const Container = styled.div`
   a {
     text-decoration: none;
   }
+
+  @media (max-width: 1024px) {
+    width: 30vw;
+  }
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 `
 export const Title = styled.h1`
   font-size: 1.5em;
