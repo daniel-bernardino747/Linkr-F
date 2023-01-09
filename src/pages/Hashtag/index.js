@@ -8,9 +8,10 @@ import { hashtag } from '../../services/api/post.services'
 
 export const loader = async ({ params }) => {
   const { hashtag: name } = params
+  const token = localStorage.getItem('token')
   const config = {
     headers: {
-      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
+      Authorization: 'Bearer ' + token,
     },
   }
   const {

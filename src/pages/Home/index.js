@@ -10,9 +10,10 @@ import { api } from '../../services/api'
 import { ContainerHome } from './style'
 
 export const loader = async () => {
+  const token = localStorage.getItem('token')
   const config = {
     headers: {
-      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
+      Authorization: 'Bearer ' + token,
     },
   }
   try {

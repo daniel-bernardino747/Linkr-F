@@ -14,9 +14,10 @@ export default function Like({ id, likes, liked }) {
   const whoLiked = functionHelper.tooltipWhoLiked(liked, likes)
 
   const handleLike = async () => {
+    const token = localStorage.getItem('token')
     const config = {
       headers: {
-        Authorization: 'Bearer ' + '219b35ff-16e0-49df-9438-2219ce81ea8e',
+        Authorization: 'Bearer ' + token,
       },
     }
     if (checked) {
