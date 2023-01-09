@@ -12,7 +12,7 @@ import { ContainerHome } from './style'
 export const loader = async () => {
   const config = {
     headers: {
-      Authorization: 'Bearer ' + '219b35ff-16e0-49df-9438-2219ce81ea8e',
+      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
     },
   }
   try {

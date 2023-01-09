@@ -16,8 +16,8 @@ export async function dislikePost(id, config) {
   return api.post(`/${id}/dislike`, {}, config)
 }
 
-export async function hashtag(name) {
-  return api.get(`/hashtag/${name}`)
+export async function hashtag(name, config) {
+  return api.get(`/hashtag/${name}`, config)
 }
 
 export async function signup(obj) {
