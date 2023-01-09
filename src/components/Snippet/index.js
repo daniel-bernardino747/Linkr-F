@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-
+import React, { useContext } from 'react'
+import { BsFillTrashFill } from 'react-icons/bs'
+import ModalContext from '../../contexts/modal.context'
 import Like from '../Like'
-import ModalComponent from '../Modal'
+
 import TextPost from '../TextPost'
 import {
   Banner,
@@ -12,10 +13,24 @@ import {
 } from './style'
 
 export default function Snippet(props) {
-  const { image, name, text, urlTitle, urlDescription, urlLink, urlImage } =
-    props
+  const {
+    idPost,
+    image,
+    name,
+    text,
+    urlTitle,
+    urlDescription,
+    urlLink,
+    urlImage,
+  } = props
+  const { setIsOpen, setModalId } = useContext(ModalContext)
+  console.log(idPost)
+  console.log(name)
+  const openModal = () => {
+    setModalId(idPost)
+    setIsOpen(true)
+  }
 
-  const [modalIsOpen, setIsOpen] = useState(false)
   return (
     <ContTimeline>
       <ContIcons>
@@ -37,7 +52,7 @@ export default function Snippet(props) {
         </Banner>
       </div>
       <IconsEditDelete>
-        <ModalComponent setIsOpen={setIsOpen} modalIsOpen={modalIsOpen} />
+        <BsFillTrashFill onClick={openModal} />
       </IconsEditDelete>
     </ContTimeline>
   )

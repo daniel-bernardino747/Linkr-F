@@ -1,19 +1,17 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
-import { BsFillTrashFill } from 'react-icons/bs'
+
 import { postHelpers } from '../../helpers/api/posts.helpers'
 import AuthContext from '../../contexts/auth.context'
 import * as s from './style'
+import ModalContext from '../../contexts/modal.context'
 
-export default function ModalComponent(props) {
+export default function ModalComponent() {
   const [loading, setLoading] = useState(false)
-  const id = 1
   const { user } = useContext(AuthContext)
-
-  const openModal = () => {
-    setIsOpen(true)
-  }
+  const { setIsOpen, modalIsOpen, modalId } = useContext(ModalContext)
+  console.log(modalId)
 
   const closeModal = () => {
     setIsOpen(false)
@@ -35,6 +33,7 @@ export default function ModalComponent(props) {
     //     })
     // })
     try {
+      console.log(id)
       setLoading(true)
       const response = await postHelpers.del(id, user)
       console.log(response)
@@ -50,7 +49,6 @@ export default function ModalComponent(props) {
 
   return (
     <>
-      <BsFillTrashFill onClick={openModal} />
       <s.Overlay isOpen={modalIsOpen}>
         <s.Container>
           {loading ? (
@@ -66,7 +64,7 @@ export default function ModalComponent(props) {
               <s.Title>Are you sure you want to delete this post?</s.Title>
               <div>
                 <s.ButtonExit onClick={closeModal}>No, go back</s.ButtonExit>
-                <s.ButtonDelete onClick={() => confirmDelete(id)}>
+                <s.ButtonDelete onClick={() => confirmDelete(modalId)}>
                   Yes, delete it
                 </s.ButtonDelete>
               </div>

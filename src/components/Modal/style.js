@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Overlay = styled.div`
   @keyframes open-linear-overlay {
     to {
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.2);
     }
   }
   z-index: 2;
