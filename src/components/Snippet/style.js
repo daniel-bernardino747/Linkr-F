@@ -13,6 +13,17 @@ export const ContTimeline = styled.div`
     font-size: 19px;
     color: #ffffff;
   }
+
+  @media (max-width: 1024px) {
+    width: 55vw;
+    height: 30vh;
+  }
+
+  @media (max-width: 860px) {
+    border-radius: 0;
+    width: 100vw;
+    height: 240px;
+  }
 `
 
 export const ContIcons = styled.div`
@@ -27,13 +38,17 @@ export const ContIcons = styled.div`
     height: 50px;
     border-radius: 30px;
   }
+
+  @media (max-width: 1024px) {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
 `
 
 export const Content = styled.div`
-  height: 75px;
   h1 {
     font-size: 19px;
-    margin-bottom: 0px;
+    height: 100%;
   }
 `
 
@@ -48,26 +63,34 @@ export const Banner = styled.div`
   cursor: pointer;
 
   div {
-    margin: 8px auto;
+    margin-left: 10px;
+    width: 300px;
   }
 
   h1 {
-    width: 320px;
+    width: 250px;
     font-size: 16px;
     color: #cecece;
     margin-bottom: 10px;
+    margin-right: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h2 {
-    width: 320px;
     font-size: 11px;
     color: #9b9595;
     margin-bottom: 10px;
+    width: 250px;
   }
 
   h3 {
     font-size: 11px;
     color: #cecece;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   img {
@@ -75,6 +98,48 @@ export const Banner = styled.div`
     width: 153px;
     border-left: 1px solid #4d4d4d;
     border-radius: 5px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 45vw;
+    height: 140px;
+
+    div {
+      width: 250px;
+    }
+
+    img {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    width: 80vw;
+    height: 120px;
+
+    div {
+      width: 450px;
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    h1,
+    div {
+      width: 150px;
+    }
+
+    h2 {
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `
 export const IconsEditDelete = styled.div`

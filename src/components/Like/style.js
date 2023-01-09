@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
 export const ContainerText = styled.div``
-export const Text = styled.span``
+export const Text = styled.span`
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
+`
 
 export const Container = styled.div`
   display: flex;
@@ -38,5 +42,9 @@ export const IconHeart = styled.div`
           ? props.theme.colors.buttons.disliked
           : props.theme.colors.buttons.liked};
     }
+  }
+
+  @media (max-width: 1024px) {
+    width: 30px;
   }
 `
