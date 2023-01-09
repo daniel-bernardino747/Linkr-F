@@ -31,3 +31,7 @@ export async function signin(obj) {
 export async function logout(config) {
   return api.delete(`/logout`, config)
 }
+
+export async function user(id, config) {
+  return api.get(`/users/${id}`, config)
+}
