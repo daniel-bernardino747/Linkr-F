@@ -4,6 +4,10 @@ export async function postPublish(obj, config) {
   return api.post(`/posts`, obj, config)
 }
 
+export async function getLikesByPost(id, config) {
+  return api.get(`/posts/likes/${id}`, config)
+}
+
 export async function likePost(id, config) {
   return api.post(`/${id}/like`, {}, config)
 }
