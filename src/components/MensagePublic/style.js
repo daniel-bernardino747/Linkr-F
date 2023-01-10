@@ -18,7 +18,7 @@ export const ContainerMensage = styled.div`
     flex-direction: column;
     box-sizing: border-box;
     padding: 0;
-  } ;
+  }
 `
 
 export const Title = styled.div`
@@ -28,7 +28,7 @@ export const Title = styled.div`
   font-size: 106px;
   @media (max-width: 860px) {
     font-size: 76px;
-  } ;
+  }
 `
 
 export const Description = styled.div`
@@ -41,5 +41,5 @@ export const Description = styled.div`
     box-sizing: border-box;
     padding-left: 60px;
     padding-right: 60px;
-  } ;
+  }
 `
