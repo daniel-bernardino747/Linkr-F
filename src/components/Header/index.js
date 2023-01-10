@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom'
 
 import AuthContext from '../../contexts/auth.context'
 import { logout } from '../../services/api/post.services'
+import SearchBar from '../SearchBar'
 import { ContHeader, Menu, Opitions } from './style'
 
-export default function Header() {
+export default function Header({ users }) {
   const navigate = useNavigate()
   const userSerializada = localStorage.getItem('user')
   const userInfo = JSON.parse(userSerializada)
@@ -39,6 +40,7 @@ export default function Header() {
     <>
       <ContHeader>
         <h1>Linkr</h1>
+        <SearchBar users={users} />
         <Menu>
           {status ? (
             <ChevronUpOutline

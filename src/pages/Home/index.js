@@ -35,7 +35,7 @@ export default function Home() {
   const { posts, hashtags } = useLoaderData()
   return (
     <ContainerHome>
-      <Header />
+      <Header users={hashtags} />
       <Main title={'Timeline'}>
         <div>
           <PublishPost />
