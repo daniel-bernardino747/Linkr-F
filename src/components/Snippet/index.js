@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
-import { BsFillTrashFill } from 'react-icons/bs'
+import React, { useContext, useState } from 'react'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 import ModalContext from '../../contexts/modal.context'
+import EditTextPost from '../EditTextPost'
 import Like from '../Like'
 import TextPost from '../TextPost'
 import {
@@ -27,36 +28,56 @@ export default function Snippet({
   reposts,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
+  const [textPost, setTextPost] = useState(text)
+  const [editOpen, setEditOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const openEditForm = () => {
+    setEditOpen(true)
+  }
+  // const closeEditForm = () => {}
+
   const openModal = () => {
     setModalId(idPost)
     setIsOpen(true)
   }
+
   return (
-    <>
-      {reposts && (<div>Re-posted by {reposts}</div>)}
-      <ContTimeline>
-        <ContIcons>
-          <img src={imageCreator} alt={imageCreator} />
-          <Like id={id} likes={likes} liked={userLiked} />
-        </ContIcons>
-        <div>
-          <Content>
-            <h1>{createdBy}</h1>
+    <ContTimeline>
+      <ContIcons>
+        <img src={image} alt={image} />
+        <Like id={id} likes={likes} liked={userLiked} />
+      </ContIcons>
+      <div>
+        <Content>
+          <h1>{username}</h1>
+          {editOpen ? (
+            <EditTextPost
+              text={text}
+              textPost={textPost}
+              setTextPost={setTextPost}
+              setEditOpen={setEditOpen}
+              id={idPost}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          ) : (
             <TextPost text={text} />
-          </Content>
-          <Banner onClick={() => window.open(urlLink)}>
-            <div>
-              <h1>{urlTitle}</h1>
-              <h2>{urlDescription}</h2>
-              <h3>{urlLink}</h3>
-            </div>
-            <img src={urlImage} alt={urlImage} />
-          </Banner>
-        </div>
-        <IconsEditDelete>
-          <BsFillTrashFill onClick={openModal} />
-        </IconsEditDelete>
-      </ContTimeline>
-    </>
+          )}
+        </Content>
+        <Banner onClick={() => window.open(urlLink)}>
+          <div>
+            <h1>{urlTitle}</h1>
+            <h2>{urlDescription}</h2>
+            <h3>{urlLink}</h3>
+          </div>
+          <img src={urlImage} alt={urlImage} />
+        </Banner>
+      </div>
+      <IconsEditDelete>
+        <BsFillPencilFill onClick={openEditForm} />
+        <BsFillTrashFill onClick={openModal} />
+      </IconsEditDelete>
+    </ContTimeline>
   )
 }

@@ -147,8 +147,12 @@ export const IconsEditDelete = styled.div`
   width: 100px;
   align-items: center;
   justify-content: space-around;
-  cursor: pointer;
+
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
+
+  svg {
+    cursor: pointer;
+  }
 `

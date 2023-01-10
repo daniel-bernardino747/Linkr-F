@@ -1,4 +1,9 @@
-import { hashtag, likePost, deletePost } from '../../services/api/post.services'
+import {
+  hashtag,
+  likePost,
+  deletePost,
+  updatePost,
+} from '../../services/api/post.services'
 
 async function like({ id, token }) {
   const config = {
@@ -49,8 +54,23 @@ async function del(id, token) {
   }
 }
 
+export async function edit(id, data, config) {
+  let httpResponse
+
+  try {
+    httpResponse = await updatePost(id, data, config)
+  } catch (error) {
+    httpResponse = error.response
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+
 export const postHelpers = {
   like,
   viewTag,
   del,
+  edit,
 }
