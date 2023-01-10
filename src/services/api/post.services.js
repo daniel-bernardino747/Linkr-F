@@ -37,3 +37,8 @@ export async function logout(config) {
 export async function user(id, config) {
   return api.get(`/users/${id}`, config)
 }
+
+
+export async function metadata(link) {
+  return api.post(`/metadata`, { link })
+}
