@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
-import { BsFillTrashFill } from 'react-icons/bs'
+import React, { useContext, useState } from 'react'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 import ModalContext from '../../contexts/modal.context'
+import EditTextPost from '../EditTextPost'
 import Like from '../Like'
 import TextPost from '../TextPost'
 import {
@@ -26,10 +27,20 @@ export default function Snippet({
   urlDescription,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
+  const [textPost, setTextPost] = useState(text)
+  const [editOpen, setEditOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const openEditForm = () => {
+    setEditOpen(true)
+  }
+  // const closeEditForm = () => {}
+
   const openModal = () => {
     setModalId(idPost)
     setIsOpen(true)
   }
+
   return (
     <ContTimeline>
       <ContIcons>
@@ -39,7 +50,19 @@ export default function Snippet({
       <div>
         <Content>
           <h1>{username}</h1>
-          <TextPost text={text} />
+          {editOpen ? (
+            <EditTextPost
+              text={text}
+              textPost={textPost}
+              setTextPost={setTextPost}
+              setEditOpen={setEditOpen}
+              id={id}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          ) : (
+            <TextPost text={text} />
+          )}
         </Content>
         <Banner onClick={() => window.open(urlLink)}>
           <div>
@@ -51,6 +74,7 @@ export default function Snippet({
         </Banner>
       </div>
       <IconsEditDelete>
+        <BsFillPencilFill onClick={openEditForm} />
         <BsFillTrashFill onClick={openModal} />
       </IconsEditDelete>
     </ContTimeline>

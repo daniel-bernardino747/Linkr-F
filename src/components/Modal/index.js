@@ -11,7 +11,6 @@ export default function ModalComponent() {
   const [loading, setLoading] = useState(false)
   const { user } = useContext(AuthContext)
   const { setIsOpen, modalIsOpen, modalId } = useContext(ModalContext)
-  console.log(modalId)
 
   const closeModal = () => {
     setIsOpen(false)
