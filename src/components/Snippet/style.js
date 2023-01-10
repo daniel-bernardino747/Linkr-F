@@ -7,7 +7,7 @@ export const ContTimeline = styled.div`
   background-color: #000000;
   border-radius: 20px;
   margin-bottom: 25px;
-
+  position: relative;
   h1 {
     margin-top: 20px;
     font-size: 19px;
@@ -141,4 +141,14 @@ export const Banner = styled.div`
       text-overflow: ellipsis;
     }
   }
+`
+export const IconsEditDelete = styled.div`
+  display: flex;
+  width: 100px;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
 `

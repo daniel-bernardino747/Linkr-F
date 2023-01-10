@@ -1,12 +1,13 @@
 import React from 'react'
 import { LineWave } from 'react-loader-spinner'
-
+import ModalComponent from '../Modal'
 import Snippet from '../Snippet'
 import { Title } from './style'
 
 export default function Timeline({ posts, loading }) {
   // const [loading, setLoading] = useState(true)
   // const { user } = useContext(AuthContext)
+  console.log(posts)
 
   return (
     <>
@@ -15,6 +16,7 @@ export default function Timeline({ posts, loading }) {
       {posts?.map((post) => (
         <Snippet key={post.id} {...post} />
       ))}
+      <ModalComponent />
     </>
   )
 }
