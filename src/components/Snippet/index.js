@@ -24,8 +24,6 @@ export default function Snippet(props) {
     urlImage,
   } = props
   const { setIsOpen, setModalId } = useContext(ModalContext)
-  console.log(idPost)
-  console.log(name)
   const openModal = () => {
     setModalId(idPost)
     setIsOpen(true)

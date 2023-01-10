@@ -18,29 +18,15 @@ export default function ModalComponent() {
   }
 
   const confirmDelete = async (id) => {
-    // return new Promise((resolve) => {
-    //   postHelpers
-    //     .del(id, user)
-    //     .then((sucess) => {
-    //       setLoading(true)
-    //       console.log(sucess)
-    //       resolve()
-    //       setLoading(false)
-    //       closeModal()
-    //     })
-    //     .catch((error) => {
-    //       alert('Error', error)
-    //     })
-    // })
     try {
-      console.log(id)
       setLoading(true)
       const response = await postHelpers.del(id, user)
-      console.log(response)
       setLoading(false)
       if (response.statusData === 401) {
         return alert('Não autorizado')
       }
+      closeModal()
+      window.location.reload()
     } catch (e) {
       console.log(e)
       alert('Falha ao deletar')

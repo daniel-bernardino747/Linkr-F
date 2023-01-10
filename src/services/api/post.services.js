@@ -16,7 +16,7 @@ export async function hashtag(name) {
   return api.get(`/hashtag/${name}`)
 }
 export async function deletePost(id, config) {
-  return api.delete(`posts/${id}`, {}, config)
+  return api.delete(`/posts/${id}`, {}, config)
 }
 export async function signup(obj) {
   return api.post(`/signup`, obj)

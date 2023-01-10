@@ -37,6 +37,7 @@ async function del(id, token) {
       Authorization: 'Bearer ' + token,
     },
   }
+
   try {
     httpResponse = await deletePost(id, config)
   } catch (error) {
