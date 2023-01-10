@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { BsFillTrashFill } from 'react-icons/bs'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
+import EditTextPost from '../EditTextPost'
 import Like from '../Like'
 import TextPost from '../TextPost'
 import {
@@ -24,12 +25,19 @@ export default function Snippet({
   url,
   createdBy,
   userLiked,
-  reposts,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
   const [urlTitle, seturlTitle] = useState(null);
   const [urlImage, seturlImage] = useState(null);
   const [urlDescription, seturlDescription] = useState(null);
+  const [textPost, setTextPost] = useState(text)
+  const [editOpen, setEditOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const openEditForm = () => {
+    setEditOpen(true)
+  }
+  // const closeEditForm = () => {}
 
   const openModal = () => {
     setModalId(idPost)
@@ -47,31 +55,41 @@ export default function Snippet({
   }, [])
 
   return (
-    <>
-      {reposts && (<div>Re-posted by {reposts}</div>)}
-      <ContTimeline>
-        <ContIcons>
-          <img src={imageCreator} alt={imageCreator} />
-          <Like id={id} likes={likes} liked={userLiked} />
-        </ContIcons>
-        <div>
-          <Content>
-            <h1>{createdBy}</h1>
+    <ContTimeline>
+      <ContIcons>
+        <img src={imageCreator} alt={imageCreator} />
+        <Like id={id} likes={likes} liked={userLiked} />
+      </ContIcons>
+      <div>
+        <Content>
+          <h1>{createdBy}</h1>
+          {editOpen ? (
+            <EditTextPost
+              text={text}
+              textPost={textPost}
+              setTextPost={setTextPost}
+              setEditOpen={setEditOpen}
+              id={idPost}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          ) : (
             <TextPost text={text} />
-          </Content>
-          <Banner onClick={() => window.open(url)}>
-            <div>
-              <h1>{urlTitle}</h1>
-              <h2>{urlDescription}</h2>
-              <h3>{url}</h3>
-            </div>
-            <img src={urlImage} alt={urlImage} />
-          </Banner>
-        </div>
-        <IconsEditDelete>
-          <BsFillTrashFill onClick={openModal} />
-        </IconsEditDelete>
-      </ContTimeline>
-    </>
+          )}
+        </Content >
+        <Banner onClick={() => window.open(url)}>
+          <div>
+            <h1>{urlTitle}</h1>
+            <h2>{urlDescription}</h2>
+            <h3>{url}</h3>
+          </div>
+          <img src={urlImage} alt={urlImage} />
+        </Banner>
+      </div >
+      <IconsEditDelete>
+        <BsFillPencilFill onClick={openEditForm} />
+        <BsFillTrashFill onClick={openModal} />
+      </IconsEditDelete>
+    </ContTimeline >
   )
 }
