@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { BsFillTrashFill } from 'react-icons/bs'
+
 import ModalContext from '../../contexts/modal.context'
 import Like from '../Like'
-
 import TextPost from '../TextPost'
 import {
   Banner,

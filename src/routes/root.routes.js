@@ -2,8 +2,9 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { ThemeProvider } from 'styled-components'
-import { ModalProvider } from '../contexts/modal.context'
+
 import { AuthProvider } from '../contexts/auth.context'
+import { ModalProvider } from '../contexts/modal.context'
 import GlobalStyle from '../styles/global.styles'
 import darkTheme from '../styles/themes/dark'
 

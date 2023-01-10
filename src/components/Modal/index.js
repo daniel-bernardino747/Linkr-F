@@ -2,10 +2,10 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
 
-import { postHelpers } from '../../helpers/api/posts.helpers'
 import AuthContext from '../../contexts/auth.context'
-import * as s from './style'
 import ModalContext from '../../contexts/modal.context'
+import { postHelpers } from '../../helpers/api/posts.helpers'
+import * as s from './style'
 
 export default function ModalComponent() {
   const [loading, setLoading] = useState(false)
