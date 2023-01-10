@@ -32,7 +32,7 @@ export default function Hashtag() {
     <Main title={title}>
       <div>
         {posts?.map((post) => (
-          <Snippet key={post.id} {...post} />
+          <Snippet key={post.id} {...post} username={post.name} />
         ))}
       </div>
       <Trending hashtagList={hashtags} />
