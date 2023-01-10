@@ -38,6 +38,6 @@ export async function user(id, config) {
   return api.get(`/users/${id}`, config)
 }
 
-export async function updatePost(id, config) {
-  return api.update(`/posts/${id}`, {}, config)
+export async function updatePost(id, data, config) {
+  return api.put(`/posts/${id}`, { data }, config)
 }

@@ -56,7 +56,7 @@ export default function Snippet({
               textPost={textPost}
               setTextPost={setTextPost}
               setEditOpen={setEditOpen}
-              id={id}
+              id={idPost}
               loading={loading}
               setLoading={setLoading}
             />

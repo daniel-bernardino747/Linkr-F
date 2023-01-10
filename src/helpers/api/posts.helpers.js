@@ -54,12 +54,12 @@ async function del(id, token) {
   }
 }
 
-export async function edit(id, config) {
+export async function edit(id, data, config) {
   let httpResponse
+
   try {
-    httpResponse = await updatePost(id, config)
+    httpResponse = await updatePost(id, data, config)
   } catch (error) {
-    console.log('erro aqui')
     httpResponse = error.response
   }
   return {

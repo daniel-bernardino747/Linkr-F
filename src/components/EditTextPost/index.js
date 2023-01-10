@@ -17,15 +17,15 @@ export default function EditTextPost({
     event.preventDefault()
     try {
       setLoading(true)
-      console.log('Aqui')
-      const response = await postHelpers.edit(id, user)
+      console.log(textPost)
+      const response = await postHelpers.edit(id, textPost, user)
       setLoading(false)
       if (response.statusData === 401) {
         return alert('Não autorizado')
       }
+      window.location.reload()
       setEditOpen(false)
     } catch (e) {
-      console.log(e)
       setLoading(false)
       setTextPost(text)
       alert('Erro ao editar')
