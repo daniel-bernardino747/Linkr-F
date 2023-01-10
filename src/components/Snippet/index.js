@@ -1,11 +1,20 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { BsFillTrashFill } from 'react-icons/bs'
+import ModalContext from '../../contexts/modal.context'
 import Like from '../Like'
+
 import TextPost from '../TextPost'
-import { Banner, Content, ContIcons, ContTimeline } from './style'
+import {
+  Banner,
+  Content,
+  ContIcons,
+  ContTimeline,
+  IconsEditDelete,
+} from './style'
 
 export default function Snippet({
   id,
+  idPost,
   text,
   likes,
   image,
@@ -16,6 +25,11 @@ export default function Snippet({
   userLiked,
   urlDescription,
 }) {
+  const { setIsOpen, setModalId } = useContext(ModalContext)
+  const openModal = () => {
+    setModalId(idPost)
+    setIsOpen(true)
+  }
   return (
     <ContTimeline>
       <ContIcons>
@@ -36,6 +50,9 @@ export default function Snippet({
           <img src={urlImage} alt={urlImage} />
         </Banner>
       </div>
+      <IconsEditDelete>
+        <BsFillTrashFill onClick={openModal} />
+      </IconsEditDelete>
     </ContTimeline>
   )
 }
