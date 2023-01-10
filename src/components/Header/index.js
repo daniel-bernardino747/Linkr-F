@@ -11,7 +11,7 @@ export default function Header() {
   const navigate = useNavigate()
   const userSerializada = localStorage.getItem('user')
   const userInfo = JSON.parse(userSerializada)
-  const [status, setStatus] = useState(false)
+  const [status, setStatus] = useState(true)
   const { user } = useContext(AuthContext)
 
   function flipMenu() {

@@ -1,19 +1,47 @@
 import React, { useState } from 'react'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
-import { postHelpers } from '../../helpers/api/posts.helpers'
+import { functionHelper } from '../../helpers/functions'
+import { dislikePost, likePost } from '../../services/api/post.services'
 import * as S from './style'
 
-export default function Like({ id, likes = 0, names }) {
-  // const { token } = useContext(AuthContext)
-  const [checked, setChecked] = useState(false)
+export default function Like({ id, likes, liked }) {
+  const [checked, setChecked] = useState(liked)
+  const [likesLength, setLikesLength] = useState(likes.length)
 
-  let token = 'bla'
+  const whoLiked = functionHelper.tooltipWhoLiked(liked, likes)
 
-  const handleLike = () => {
-    const result = postHelpers.like({ id, token })
-    setChecked(!checked)
-    return result
+  const handleLike = async () => {
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    }
+    if (checked) {
+      setChecked(false)
+      try {
+        await dislikePost(id, config)
+        setChecked(false)
+        setLikesLength(likesLength - 1)
+      } catch (error) {
+        setChecked(true)
+        console.log(error)
+      }
+    } else {
+      setChecked(true)
+      try {
+        await likePost(id, config)
+        setChecked(true)
+        setLikesLength(likesLength + 1)
+        console.log('curti')
+      } catch (error) {
+        setChecked(false)
+        console.log(error)
+      }
+    }
   }
 
   return (
@@ -22,10 +50,10 @@ export default function Like({ id, likes = 0, names }) {
         {checked ? <BsHeartFill /> : <BsHeart />}
       </S.IconHeart>
 
-      <S.ContainerText>
-        <S.Text>{likes} likes</S.Text>
-        <S.Text>{names}</S.Text>
-      </S.ContainerText>
+      <S.Text id={id}>
+        {likesLength} {likesLength === 1 ? 'like' : 'likes'}
+      </S.Text>
+      <ReactTooltip anchorId={id} place="top" content={whoLiked.tooltip} />
     </S.Container>
   )
 }

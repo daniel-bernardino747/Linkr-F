@@ -12,32 +12,33 @@ import {
   IconsEditDelete,
 } from './style'
 
-export default function Snippet(props) {
-  const {
-    idPost,
-    image,
-    name,
-    text,
-    urlTitle,
-    urlDescription,
-    urlLink,
-    urlImage,
-  } = props
+export default function Snippet({
+  id,
+  idPost,
+  text,
+  likes,
+  image,
+  urlLink,
+  username,
+  urlTitle,
+  urlImage,
+  userLiked,
+  urlDescription,
+}) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
   const openModal = () => {
     setModalId(idPost)
     setIsOpen(true)
   }
-
   return (
     <ContTimeline>
       <ContIcons>
         <img src={image} alt={image} />
-        <Like />
+        <Like id={id} likes={likes} liked={userLiked} />
       </ContIcons>
       <div>
         <Content>
-          <h1>{name}</h1>
+          <h1>{username}</h1>
           <TextPost text={text} />
         </Content>
         <Banner onClick={() => window.open(urlLink)}>
