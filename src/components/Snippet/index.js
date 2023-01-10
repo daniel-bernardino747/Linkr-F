@@ -18,13 +18,14 @@ export default function Snippet({
   idPost,
   text,
   likes,
-  image,
+  imageCreator,
   urlLink,
-  username,
+  createdBy,
   urlTitle,
   urlImage,
   userLiked,
   urlDescription,
+  reposts,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
   const [textPost, setTextPost] = useState(text)
