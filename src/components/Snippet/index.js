@@ -46,12 +46,11 @@ export default function Snippet({
   }
 
   useEffect(() => {
-    metadata(url)
-      .then((res) => {
-        seturlTitle(res.data.urlTitle)
-        seturlImage(res.data.urlImage)
-        seturlDescription(res.data.urlDescription)
-      })
+    metadata(url).then((res) => {
+      seturlTitle(res.data.urlTitle)
+      seturlImage(res.data.urlImage)
+      seturlDescription(res.data.urlDescription)
+    })
   }, [])
 
   return (

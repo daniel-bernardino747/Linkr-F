@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLoaderData } from 'react-router'
 
+import Header from '../../components/Header'
 import Snippet from '../../components/Snippet'
 import Main from '../../components/Template/Main'
 import Trending from '../../components/Trending'
+import { useSearchContext } from '../../contexts/search.context'
 import { hashtag } from '../../services/api/post.services'
+import * as S from './style'
 
 export const loader = async ({ params }) => {
   const { hashtag: name } = params
@@ -14,28 +17,29 @@ export const loader = async ({ params }) => {
       Authorization: 'Bearer ' + token,
     },
   }
-  const {
-    data: { posts, hashtags },
-  } = await hashtag(name, config)
-
+  const { data } = await hashtag(name, config)
   return {
-    posts,
+    ...data,
     title: name,
-    hashtags,
   }
 }
 
 export default function Hashtag() {
-  const { title, posts, hashtags } = useLoaderData()
-  console.log(posts)
+  const { title, posts, hashtags, users } = useLoaderData()
+  const { searchResults, setSearchResults } = useSearchContext()
+  console.log(users)
+  useEffect(() => setSearchResults({ ...searchResults, original: users }), [])
   return (
-    <Main title={title}>
-      <div>
-        {posts?.map((post) => (
-          <Snippet key={post.id} {...post} username={post.name} />
-        ))}
-      </div>
-      <Trending hashtagList={hashtags} />
-    </Main>
+    <S.Container>
+      <Header />
+      <Main title={title}>
+        <div>
+          {posts?.map((post) => (
+            <Snippet key={post.id} {...post} username={post.name} />
+          ))}
+        </div>
+        <Trending hashtagList={hashtags} />
+      </Main>
+    </S.Container>
   )
 }

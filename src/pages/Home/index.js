@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 
 import Header from '../../components/Header'
@@ -6,6 +6,7 @@ import PublishPost from '../../components/PublishPost'
 import Main from '../../components/Template/Main'
 import Timeline from '../../components/Timeline'
 import Trending from '../../components/Trending'
+import { useSearchContext } from '../../contexts/search.context'
 import { api } from '../../services/api'
 import { ContainerHome } from './style'
 
@@ -32,10 +33,14 @@ export const loader = async () => {
 }
 
 export default function Home() {
-  const { posts, hashtags } = useLoaderData()
+  const { posts, hashtags, users } = useLoaderData()
+  const { searchResults, setSearchResults } = useSearchContext()
+
+  useEffect(() => setSearchResults({ ...searchResults, original: users }), [])
+
   return (
     <ContainerHome>
-      <Header users={hashtags} />
+      <Header />
       <Main title={'Timeline'}>
         <div>
           <PublishPost />

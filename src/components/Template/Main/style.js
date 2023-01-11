@@ -39,10 +39,10 @@ export const Unfollow = styled.button`
   justify-content: center;
   width: 112px;
   height: 31px;
-  background-color:#FFFFFF;
+  background-color: #ffffff;
   border-radius: 5px;
   font-family: 'Lato', sans-serif;
-  color: #1877F2;
+  color: #1877f2;
   font-weight: 700;
   font-size: 14px;
 `
@@ -52,10 +52,10 @@ export const Follow = styled.button`
   justify-content: center;
   width: 112px;
   height: 31px;
-  background-color:#1877F2;
+  background-color: #1877f2;
   border-radius: 5px;
   font-family: 'Lato', sans-serif;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 700;
   font-size: 14px;
 `

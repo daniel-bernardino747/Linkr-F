@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLoaderData } from 'react-router'
 
 import Header from '../../components/Header'
 import Snippet from '../../components/Snippet'
 import Main from '../../components/Template/Main'
 import Trending from '../../components/Trending'
+import { useSearchContext } from '../../contexts/search.context'
 import { user } from '../../services/api/post.services'
-import { ContainerUser } from './style'
+import * as S from './style'
 
 export const loader = async ({ params }) => {
   const { id } = params
@@ -16,31 +17,27 @@ export const loader = async ({ params }) => {
       Authorization: 'Bearer ' + token,
     },
   }
-  const {
-    data: { posts, hashtags, user: infosUser, follow },
-  } = await user(id, config)
-
-  console.log(infosUser)
+  const { data } = await user(id, config)
+  console.log(data.users)
 
   return {
-    posts,
+    ...data,
     title: {
-      user: `${infosUser.name}'s posts`,
-      image: infosUser.image,
-      id: infosUser.id
+      user: `${data.user.name}'s posts`,
+      image: data.user.image,
+      id: data.user.id,
     },
-    hashtags,
-    follow
   }
 }
 
 export default function User() {
-  const { title, posts, hashtags, follow } = useLoaderData()
-  console.log(follow)
+  const { title, posts, hashtags, users, follow } = useLoaderData()
+  const { searchResults, setSearchResults } = useSearchContext()
+  useEffect(() => setSearchResults({ ...searchResults, original: users }), [])
   return (
-    <ContainerUser>
+    <S.Container>
       <Header />
-      <Main title={title} follow={follow} user={true}>
+      <Main title={title} follow={follow} user>
         <div>
           {posts?.map((post) => (
             <Snippet key={post.id} {...post} username={post.name} />
@@ -48,6 +45,6 @@ export default function User() {
         </div>
         <Trending hashtagList={hashtags} />
       </Main>
-    </ContainerUser>
+    </S.Container>
   )
 }
