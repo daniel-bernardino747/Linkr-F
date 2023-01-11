@@ -8,7 +8,7 @@ export const ContainerForm = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  } ;
+  }
 `
 export const ContainerAuthForm = styled.form`
   width: 30%;
@@ -24,7 +24,7 @@ export const ContainerAuthForm = styled.form`
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-  } ;
+  }
 `
 export const InputCamp = styled.input`
   width: 85%;
@@ -42,7 +42,7 @@ export const InputCamp = styled.input`
   @media (max-width: 860px) {
     width: 85%;
     font-size: 22px;
-  } ;
+  }
 `
 export const ButtonCamp = styled.input.attrs({ type: 'submit' })`
   width: 85%;
@@ -57,7 +57,7 @@ export const ButtonCamp = styled.input.attrs({ type: 'submit' })`
   @media (max-width: 860px) {
     width: 85%;
     font-size: 22px;
-  } ;
+  }
 `
 export const TextError = styled.p`
   margin-top: 5px;

@@ -1,7 +1,8 @@
-import * as s from './style'
 import React, { useContext } from 'react'
-import { postHelpers } from '../../helpers/api/posts.helpers'
+
 import AuthContext from '../../contexts/auth.context'
+import { postHelpers } from '../../helpers/api/posts.helpers'
+import * as s from './style'
 
 export default function EditTextPost({
   text,

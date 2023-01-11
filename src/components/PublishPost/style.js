@@ -31,7 +31,7 @@ export const Publish = styled.div`
       width: 45px;
       height: 45px;
     }
-  } ;
+  }
 `
 export const Form = styled.form`
   width: 88%;

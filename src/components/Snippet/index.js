@@ -15,8 +15,6 @@ import {
   IconsEditDelete,
 } from './style'
 
-
-
 export default function Snippet({
   id,
   idPost,
@@ -29,9 +27,9 @@ export default function Snippet({
   userLiked,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
-  const [urlTitle, seturlTitle] = useState(null);
-  const [urlImage, seturlImage] = useState(null);
-  const [urlDescription, seturlDescription] = useState(null);
+  const [urlTitle, seturlTitle] = useState(null)
+  const [urlImage, seturlImage] = useState(null)
+  const [urlDescription, seturlDescription] = useState(null)
   const [textPost, setTextPost] = useState(text)
   const [editOpen, setEditOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -80,7 +78,7 @@ export default function Snippet({
           ) : (
             <TextPost text={text} />
           )}
-        </Content >
+        </Content>
         <Banner onClick={() => window.open(url)}>
           <div>
             <h1>{urlTitle}</h1>
@@ -89,11 +87,11 @@ export default function Snippet({
           </div>
           <img src={urlImage} alt={urlImage} />
         </Banner>
-      </div >
+      </div>
       <IconsEditDelete>
         <BsFillPencilFill onClick={openEditForm} />
         <BsFillTrashFill onClick={openModal} />
       </IconsEditDelete>
-    </ContTimeline >
+    </ContTimeline>
   )
 }

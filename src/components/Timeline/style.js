@@ -9,5 +9,5 @@ export const Title = styled.h1`
 
   @media (max-width: 1024px) {
     font-size: 24px;
-  } ;
+  }
 `
