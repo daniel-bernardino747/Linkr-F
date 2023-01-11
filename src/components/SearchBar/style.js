@@ -27,18 +27,32 @@ export const Input = styled.input`
 `
 export const ModalSearch = styled.div`
   display: ${(props) => (props.open ? 'flex' : 'none')};
+  z-index: 1;
   position: absolute;
   top: 1em;
   right: 0;
   left: 0;
   flex-direction: column;
-  padding: 1.7em 1em 0.7em 1em;
+  max-height: 14em;
   border-radius: 0 0 1em 1em;
+  overflow-y: hidden;
   background-color: gray;
-  gap: 0.5em;
-
   a {
     text-decoration: none;
+  }
+`
+export const Scroll = styled.div`
+  padding: 1.7em 1em 0.7em 1em;
+  overflow: auto;
+  gap: 0.5em;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid gray;
+    border-radius: 20px;
+    background-color: #333333;
   }
 `
 
@@ -50,8 +64,8 @@ export const ItemUser = styled.div`
   border-radius: 2em;
   gap: 0.5em;
   &:hover {
-    background-color: ${(props) => (props.notFound ? '#8e8e8e' : 'none')};
     cursor: ${(props) => (props.notFound ? 'pointer' : 'initial')};
+    background-color: ${(props) => (props.notFound ? '#8e8e8e' : 'none')};
   }
 `
 export const ImageUser = styled.img`
@@ -61,7 +75,10 @@ export const ImageUser = styled.img`
   border-radius: 1em;
 `
 export const NameUser = styled.p`
-  font-size: 1.2em;
   color: black;
   font-weight: 500;
+  font-size: 1.2em;
+`
+export const FollowingUser = styled.span`
+  color: #0009;
 `

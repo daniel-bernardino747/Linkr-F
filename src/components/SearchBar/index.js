@@ -12,14 +12,16 @@ export default function SearchBar() {
   const handleSearch = (e) => {
     e.target.value.length > 0 ? setModal(true) : setModal(false)
 
-    console.log(searchResults)
+    const resultsArrayFollows = searchResults.original
+      .filter((user) => user.follow)
+      .filter((user) => user.name.includes(e.target.value))
+    const resultsArrayNoFollows = searchResults.original
+      .filter((user) => !user.follow)
+      .filter((user) => user.name.includes(e.target.value))
 
-    const resultsArray = searchResults.original.filter((user) =>
-      user.name.includes(e.target.value)
-    )
+    const resultsArray = resultsArrayFollows.concat(resultsArrayNoFollows)
 
     if (resultsArray.length === 0) {
-      console.log(resultsArray.length === 0)
       return setSearchResults({
         ...searchResults,
         search: [{ name: 'Nenhum resultado encontrado.' }],
@@ -38,14 +40,24 @@ export default function SearchBar() {
           element={S.Input}
         />
         <S.ModalSearch open={modal}>
-          {searchResults.search.map((i) => (
-            <Link key={i.id} to={`/users/${i.id}`}>
-              <S.ItemUser key={i.id} notFound={!!searchResults.search[0].image}>
-                {i.image && <S.ImageUser src={i.image} alt={i.name} />}
-                <S.NameUser>{i.name}</S.NameUser>
-              </S.ItemUser>
-            </Link>
-          ))}
+          <S.Scroll>
+            {searchResults.search.map((i) => (
+              <Link key={i.id} to={`/users/${i.id}`}>
+                <S.ItemUser
+                  key={i.id}
+                  notFound={!!searchResults.search[0].image}
+                >
+                  {i.image && <S.ImageUser src={i.image} alt={i.name} />}
+                  <S.NameUser>
+                    {i.name}
+                    {i.follow && (
+                      <S.FollowingUser> ● following</S.FollowingUser>
+                    )}
+                  </S.NameUser>
+                </S.ItemUser>
+              </Link>
+            ))}
+          </S.Scroll>
         </S.ModalSearch>
       </S.Container>
     </div>
