@@ -22,18 +22,22 @@ export const loader = async ({ params }) => {
 
   return {
     ...data,
-    title: `${data.user.name}'s posts`,
+    title: {
+      user: `${data.user.name}'s posts`,
+      image: data.user.image,
+      id: data.user.id,
+    },
   }
 }
 
 export default function User() {
-  const { title, posts, hashtags, users } = useLoaderData()
+  const { title, posts, hashtags, users, follow } = useLoaderData()
   const { searchResults, setSearchResults } = useSearchContext()
   useEffect(() => setSearchResults({ ...searchResults, original: users }), [])
   return (
     <S.Container>
       <Header />
-      <Main title={title}>
+      <Main title={title} follow={follow} user>
         <div>
           {posts?.map((post) => (
             <Snippet key={post.id} {...post} username={post.name} />

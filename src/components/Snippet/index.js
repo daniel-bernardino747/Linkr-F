@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
@@ -19,9 +20,10 @@ export default function Snippet({
   idPost,
   text,
   likes,
-  imageCreator,
   url,
+  imageCreator,
   createdBy,
+  idCreator,
   userLiked,
 }) {
   const { setIsOpen, setModalId } = useContext(ModalContext)
@@ -31,6 +33,7 @@ export default function Snippet({
   const [textPost, setTextPost] = useState(text)
   const [editOpen, setEditOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const routerUser = `/users/${idCreator}`
 
   const openEditForm = () => {
     setEditOpen(true)
@@ -47,7 +50,6 @@ export default function Snippet({
       seturlTitle(res.data.urlTitle)
       seturlImage(res.data.urlImage)
       seturlDescription(res.data.urlDescription)
-      console.log(res.data)
     })
   }, [])
 
@@ -59,7 +61,9 @@ export default function Snippet({
       </ContIcons>
       <div>
         <Content>
-          <h1>{createdBy}</h1>
+          <Link style={{ textDecoration: 'none' }} to={routerUser}>
+            <h1>{createdBy}</h1>
+          </Link>
           {editOpen ? (
             <EditTextPost
               text={text}
