@@ -11,12 +11,14 @@ import * as S from './style'
 
 export const loader = async ({ params }) => {
   const { id } = params
+  const token = localStorage.getItem('token')
   const config = {
     headers: {
-      Authorization: 'Bearer ' + 'c03b32e1-fa8a-417d-a016-202e41aa9dc6',
+      Authorization: 'Bearer ' + token,
     },
   }
   const { data } = await user(id, config)
+  console.log(data.users)
 
   return {
     ...data,
@@ -27,7 +29,6 @@ export const loader = async ({ params }) => {
 export default function User() {
   const { title, posts, hashtags, users } = useLoaderData()
   const { searchResults, setSearchResults } = useSearchContext()
-  console.log(users)
   useEffect(() => setSearchResults({ ...searchResults, original: users }), [])
   return (
     <S.Container>
