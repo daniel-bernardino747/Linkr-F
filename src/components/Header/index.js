@@ -8,7 +8,7 @@ import { logout } from '../../services/api/post.services'
 import SearchBar from '../SearchBar'
 import { ContHeader, Menu, Opitions } from './style'
 
-export default function Header({ users }) {
+export default function Header() {
   const navigate = useNavigate()
   const userSerializada = localStorage.getItem('user')
   const userInfo = JSON.parse(userSerializada)
@@ -40,7 +40,7 @@ export default function Header({ users }) {
     <>
       <ContHeader>
         <h1>Linkr</h1>
-        <SearchBar users={users} />
+        <SearchBar />
         <Menu>
           {status ? (
             <ChevronUpOutline
