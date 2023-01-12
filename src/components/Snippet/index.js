@@ -17,7 +17,6 @@ import {
 
 export default function Snippet({
   id,
-  idPost,
   text,
   likes,
   url,
@@ -41,7 +40,7 @@ export default function Snippet({
   // const closeEditForm = () => {}
 
   const openModal = () => {
-    setModalId(idPost)
+    setModalId(id)
     setIsOpen(true)
   }
 
@@ -70,7 +69,7 @@ export default function Snippet({
               textPost={textPost}
               setTextPost={setTextPost}
               setEditOpen={setEditOpen}
-              id={idPost}
+              id={id}
               loading={loading}
               setLoading={setLoading}
             />
