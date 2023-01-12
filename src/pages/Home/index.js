@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Oval } from 'react-loader-spinner'
+import React, { useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 
 import Header from '../../components/Header'
+import { LoadingPage } from '../../components/LoadingPage'
 import PublishPost from '../../components/PublishPost'
 import Main from '../../components/Template/Main'
 import Timeline from '../../components/Timeline'
 import Trending from '../../components/Trending'
 import { useSearchContext } from '../../contexts/search.context'
+import { useElementOnScreen } from '../../helpers/hooks/useElementOnScreen'
 import { api } from '../../services/api'
 import * as S from './style'
 
@@ -71,62 +72,10 @@ export default function Home() {
         <div>
           <PublishPost />
           <Timeline posts={posts} />
-          <S.Loading ref={sentinelRef} loading={loading}>
-            <Oval
-              height={50}
-              width={50}
-              color="rgba(51,51,51, 1)"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={loading.state}
-              ariaLabel="oval-loading"
-              secondaryColor="rgba(109, 109, 109, 1)"
-              strokeWidth={5}
-              strokeWidthSecondary={5}
-            />
-            <S.LoadingText visible={loading.state}>
-              Loading more posts...
-            </S.LoadingText>
-          </S.Loading>
+          <LoadingPage ref={sentinelRef} loading={loading} />
         </div>
         <Trending hashtagList={hashtags} />
       </Main>
     </S.ContainerHome>
   )
-}
-
-const useElementOnScreen = ({ posts, setCurrentPage }) => {
-  const [loadingState, setLoading] = useState(false)
-
-  const sentinelRef = useRef(null)
-
-  useEffect(() => {
-    const postsListsNoLongerHasPost = posts.length % 10 !== 0
-    if (postsListsNoLongerHasPost) return
-
-    const callbackFunction = (entries) => {
-      const [entry] = entries
-
-      if (entry.isIntersecting) {
-        setLoading(entry.isIntersecting)
-        setCurrentPage((currentPageInsideState) => currentPageInsideState + 1)
-      }
-    }
-
-    const intersectionObserver = new IntersectionObserver(callbackFunction)
-    if (sentinelRef.current) intersectionObserver.observe(sentinelRef.current)
-
-    return () => {
-      if (sentinelRef.current)
-        intersectionObserver.unobserve(sentinelRef.current)
-    }
-  }, [])
-
-  return [
-    sentinelRef,
-    {
-      state: loadingState,
-      set: setLoading,
-    },
-  ]
 }
