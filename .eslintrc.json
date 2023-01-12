@@ -11,6 +11,7 @@
   },
   "plugins": ["react", "import-helpers"],
   "rules": {
+    "no-extra-semi": "off",
     "space-before-function-paren": "off",
     "react/prop-types": "off",
     "import-helpers/order-imports": [

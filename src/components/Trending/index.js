@@ -8,8 +8,8 @@ export default function Trending({ hashtagList }) {
     <S.Container>
       <S.Title>Trendings</S.Title>
       <S.Line />
-      {hashtagList.map((tag) => (
-        <S.Tags key={tag.id}>
+      {hashtagList.map((tag, i) => (
+        <S.Tags key={i}>
           <Link to={`/hashtag/${tag.name}`}>{tag.name}</Link>
         </S.Tags>
       ))}
