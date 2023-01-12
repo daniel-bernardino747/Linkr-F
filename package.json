@@ -23,6 +23,7 @@
     "react-tooltip": "^5.4.0",
     "sort-by": "^1.2.0",
     "styled-components": "^5.3.6",
+    "use-interval": "^1.4.0",
     "validator": "^13.7.0"
   },
   "scripts": {
