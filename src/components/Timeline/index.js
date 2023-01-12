@@ -6,10 +6,6 @@ import Snippet from '../Snippet'
 import { Title } from './style'
 
 export default function Timeline({ posts, loading }) {
-  // const [loading, setLoading] = useState(true)
-  // const { user } = useContext(AuthContext)
-  // console.log(posts)
-
   return (
     <>
       {posts.length === 0 && !loading && <Title>There are no posts yet</Title>}
