@@ -3,17 +3,21 @@ import { LineWave } from 'react-loader-spinner'
 
 import ModalComponent from '../Modal'
 import Snippet from '../Snippet'
-import { Title } from './style'
+import * as S from './style'
 
-export default function Timeline({ posts, loading }) {
+export default function Timeline({ posts, loading, active }) {
   return (
-    <>
-      {posts.length === 0 && !loading && <Title>There are no posts yet</Title>}
+    <S.Timeline active={active}>
+      {posts.length === 0 && !loading && (
+        <S.Title>There are no posts yet</S.Title>
+      )}
       {loading && <LineWave color="white" />}
-      {posts?.map((post, i) => (
-        <Snippet key={post.id ** i * i} {...post} />
-      ))}
+      <ul>
+        {posts?.map((post, i) => (
+          <Snippet key={post.id ** i * i} {...post} />
+        ))}
+      </ul>
       <ModalComponent />
-    </>
+    </S.Timeline>
   )
 }

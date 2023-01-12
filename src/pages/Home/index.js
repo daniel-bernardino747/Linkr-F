@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 
+import useInterval from 'use-interval'
+
 import Header from '../../components/Header'
 import { LoadingPage } from '../../components/LoadingPage'
 import PublishPost from '../../components/PublishPost'
@@ -41,6 +43,8 @@ export default function Home() {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [posts, setPosts] = useState(apiPosts)
+  const [recentPosts, setRecentPosts] = useState([])
+  const [activeAnimation, setActiveAnimation] = useState(false)
 
   const [sentinelRef, loading] = useElementOnScreen({
     posts,
@@ -65,13 +69,45 @@ export default function Home() {
     }
   }, [currentPage])
 
+  useInterval(async () => {
+    const firstPost = [...posts].shift()
+    const token = localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    }
+    const { data: newPosts } = await api.post(
+      `/refresh`,
+      { datetime: firstPost.createdAt },
+      config
+    )
+    setRecentPosts([...newPosts])
+    setActiveAnimation(false)
+  }, 15000)
+
+  const handleLoadNewPosts = () => {
+    const removedPosts = posts.splice(
+      recentPosts.length,
+      10 - recentPosts.length
+    )
+    setPosts([...recentPosts, ...removedPosts])
+    setRecentPosts([])
+    setActiveAnimation(true)
+  }
+
   return (
     <S.ContainerHome>
       <Header />
       <Main title={'Timeline'}>
         <div>
           <PublishPost />
-          <Timeline posts={posts} />
+          {recentPosts.length !== 0 && (
+            <S.messageNewPosts onClick={handleLoadNewPosts}>
+              {recentPosts.length} new posts, load more! ⟳
+            </S.messageNewPosts>
+          )}
+          <Timeline posts={posts} active={activeAnimation} />
           <LoadingPage ref={sentinelRef} loading={loading} />
         </div>
         <Trending hashtagList={hashtags} />
