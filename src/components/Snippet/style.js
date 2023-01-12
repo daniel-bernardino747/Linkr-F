@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ContTimeline = styled.div`
+export const ContTimeline = styled.li`
   display: flex;
   width: 611px;
   height: 276px;
