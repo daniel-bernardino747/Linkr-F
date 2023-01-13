@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
-import { HiOutlineArrowPath } from "react-icons/hi2";
+import { HiOutlineArrowPath } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
-
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
 import Comments from '../Comments'
@@ -22,7 +21,7 @@ import {
   ContTimeline,
   IconsEditDelete,
   ListComments,
-  ContShare
+  ContShare,
 } from './style'
 
 export default function Snippet({
@@ -34,9 +33,10 @@ export default function Snippet({
   createdBy,
   idCreator,
   userLiked,
+  comments,
   repostsName,
   repostsId,
-  count
+  count,
 }) {
   const userData = localStorage.getItem('user')
   const dados = JSON.parse(userData)
@@ -50,6 +50,8 @@ export default function Snippet({
   const [loading, setLoading] = useState(false)
   const [optionOpen, setOptionOpen] = useState(false)
   const [commentOpen, setCommentOpen] = useState(false)
+  const [commentsPost, setCommentsPost] = useState(comments)
+  //const ficComments = []
 
   // const openEditForm = () => {
   //   setEditOpen(true)
@@ -72,23 +74,23 @@ export default function Snippet({
 
   return (
     <ContPost>
-      {repostsId !== null &&
+      {repostsId !== null && (
         <>
-          {repostsId !== idCreator &&
+          {repostsId !== idCreator && (
             <ContShare>
               <HiOutlineArrowPath />
               <p>Re-posted by</p>
               <h1>{repostsName}</h1>
-
             </ContShare>
-          }
+          )}
         </>
-      }
+      )}
       <ContTimeline>
         <ContIcons>
           <img src={imageCreator} alt={imageCreator} />
           <Like id={id} likes={likes} liked={userLiked} />
           <CommentsIcon
+            countComments={commentsPost.length}
             setCommentOpen={setCommentOpen}
             commentOpen={commentOpen}
           />
@@ -149,9 +151,17 @@ export default function Snippet({
       {commentOpen ? (
         <ContainerComment>
           <ListComments>
-            <Comments />
+            {commentsPost.map((comment, id) => (
+              <Comments key={id} {...comment} idCreator={idCreator} />
+            ))}
           </ListComments>
-          <FormComment idPost={id} idCreator={idCreator} />
+          <FormComment
+            idPost={id}
+            idCreator={idCreator}
+            dados={dados}
+            comments={comments}
+            setCommentsPost={setCommentsPost}
+          />
         </ContainerComment>
       ) : (
         ''

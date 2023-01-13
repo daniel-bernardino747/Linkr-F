@@ -3,34 +3,57 @@ import { useForm } from 'react-hook-form'
 
 import AuthContext from '../../contexts/auth.context'
 import { postHelpers } from '../../helpers/api/posts.helpers'
+import * as S from './style'
+import { IoPaperPlaneOutline } from 'react-icons/io5'
+
 //import { user } from '../../services/api/post.services'
-export default function FormComment(/* { idPost } */) {
+export default function FormComment({
+  idPost,
+  idCreator,
+  dados,
+  setCommentsPost,
+}) {
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm()
+  const { id, name, image } = dados
   const { user } = useContext(AuthContext)
+
   const CommentSubmit = async (data) => {
     const { comment } = data
-    console.log(comment)
+    const body = { comment, idCreator, id, name, image }
+    const newArray = [
+      {
+        id,
+        image,
+        user: name,
+        comment,
+      },
+    ]
     try {
-      await postHelpers.comment(/* id, */ comment, user)
+      await postHelpers.comment(idPost, body, user)
+      setCommentsPost((comment) => [...comment, ...newArray])
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(CommentSubmit)}>
+    <S.ContainerFormComment onSubmit={handleSubmit(CommentSubmit)}>
+      <img src={image} alt="image profile" />
       <input
-        placeholder="escreve aqui"
+        placeholder="write a comment..."
         {...register('comment', {
           required: true,
           maxLength: 300,
         })}
       />
-      <button>Enviar</button>
-    </form>
+
+      <button>
+        <IoPaperPlaneOutline />
+      </button>
+    </S.ContainerFormComment>
   )
 }
