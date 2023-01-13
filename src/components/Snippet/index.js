@@ -30,7 +30,7 @@ export default function Snippet({
   createdBy,
   idCreator,
   userLiked,
-  //comments,
+  comments,
 }) {
   const userData = localStorage.getItem('user')
   const dados = JSON.parse(userData)
@@ -44,7 +44,8 @@ export default function Snippet({
   const [loading, setLoading] = useState(false)
   const [optionOpen, setOptionOpen] = useState(false)
   const [commentOpen, setCommentOpen] = useState(false)
-  const ficComments = []
+  const [commentsPost, setCommentsPost] = useState(comments)
+  //const ficComments = []
 
   // const openEditForm = () => {
   //   setEditOpen(true)
@@ -131,11 +132,17 @@ export default function Snippet({
       {commentOpen ? (
         <ContainerComment>
           <ListComments>
-            {ficComments.map((comment, id) => (
-              <Comments key={id} {...comment} />
+            {commentsPost.map((comment, id) => (
+              <Comments key={id} {...comment} idCreator={idCreator} />
             ))}
           </ListComments>
-          <FormComment idPost={id} idCreator={idCreator} dados={dados} />
+          <FormComment
+            idPost={id}
+            idCreator={idCreator}
+            dados={dados}
+            comments={comments}
+            setCommentsPost={setCommentsPost}
+          />
         </ContainerComment>
       ) : (
         ''

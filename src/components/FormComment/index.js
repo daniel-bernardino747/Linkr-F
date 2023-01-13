@@ -6,7 +6,12 @@ import * as S from './style'
 import { IoPaperPlaneOutline } from 'react-icons/io5'
 
 //import { user } from '../../services/api/post.services'
-export default function FormComment({ idPost, idCreator, dados }) {
+export default function FormComment({
+  idPost,
+  idCreator,
+  dados,
+  setCommentsPost,
+}) {
   const {
     register,
     handleSubmit,
@@ -14,13 +19,21 @@ export default function FormComment({ idPost, idCreator, dados }) {
   } = useForm()
   const { id, name, image } = dados
   const { user } = useContext(AuthContext)
+
   const CommentSubmit = async (data) => {
     const { comment } = data
-
     const body = { comment, idCreator, id, name, image }
-
+    const newArray = [
+      {
+        id,
+        image,
+        user: name,
+        comment,
+      },
+    ]
     try {
       await postHelpers.comment(idPost, body, user)
+      setCommentsPost((comment) => [...comment, ...newArray])
     } catch (error) {
       console.log(error)
     }
