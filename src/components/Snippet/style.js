@@ -1,5 +1,8 @@
 import styled from 'styled-components'
-
+export const ContPost = styled.div`
+  width: 611px;
+  margin-bottom: 25px;
+`
 export const ContTimeline = styled.li`
   display: flex;
   width: 100%;
@@ -25,6 +28,31 @@ export const ContTimeline = styled.li`
     border-radius: 0;
     width: 100vw;
     height: 240px;
+  }
+`
+export const ContShare = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: #1e1e1e;
+  border-radius: 20px 20px 0px 0px;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+
+  h1 {
+    font-family: 'Lato';
+    font-style: normal;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  p {
+    font-family: 'Lato';
+    font-style: normal;
+    color: #ffffff;
+    margin: 0px 10px 0px 15px;
+    font-weight: 400;
+    font-size: 16px;
   }
 `
 
@@ -126,9 +154,27 @@ export const IconsEditDelete = styled.div`
 
   position: absolute;
   top: 1.5rem;
-  right: 1.5rem;
+  right: 0.5rem;
 
   svg {
+    font-size: 1.2em;
     cursor: pointer;
   }
+`
+export const ContainerComment = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 611px;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+`
+export const ListComments = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: calc(20px);
 `

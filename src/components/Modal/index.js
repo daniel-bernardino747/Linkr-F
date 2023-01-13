@@ -34,6 +34,7 @@ export default function ModalComponent() {
 
   return (
     <>
+      HiOutlineArrowPath
       <s.Overlay isOpen={modalIsOpen}>
         <s.Container>
           {loading ? (
