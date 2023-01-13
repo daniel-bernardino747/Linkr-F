@@ -1,19 +1,24 @@
 import React from 'react'
 import * as S from './style'
-export default function Comments() {
+export default function Comments({
+  image,
+  username,
+  comment,
+  idUser,
+  idCreator,
+}) {
   return (
     <>
       <S.Comment>
-        <img
-          src="https://www.wmbstore.com.br/img_sistemas/ecommerce/img_produtos/1/foto_thumb_400_foto_0_3089_emoji-002--fundo-branco.png"
-          alt="image comment"
-        />
+        <img src={image} alt="image comment" />
         <S.ContainerTextComment>
           <S.InfoComment>
-            <S.UsernameComment>xaropingo</S.UsernameComment>
-            <S.InfoUser>• following</S.InfoUser>
+            <S.UsernameComment>{username}</S.UsernameComment>
+            <S.InfoUser>
+              {idUser === idCreator ? '• author post' : '• following'}
+            </S.InfoUser>
           </S.InfoComment>
-          <S.TextComment>Não gostei de css</S.TextComment>
+          <S.TextComment>{comment}</S.TextComment>
         </S.ContainerTextComment>
       </S.Comment>
     </>

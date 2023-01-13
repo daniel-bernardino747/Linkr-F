@@ -165,6 +165,7 @@ export const IconsEditDelete = styled.div`
 export const ContainerComment = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 611px;
   background-color: #1e1e1e;
   border-radius: 20px;

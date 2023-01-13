@@ -56,5 +56,6 @@ export async function unfollow(id, config) {
 }
 
 export async function commentPost(id, data, config) {
+  // console.log('aqui no services')
   return api.post(`/${id}/posts/comments`, { data }, config)
 }
