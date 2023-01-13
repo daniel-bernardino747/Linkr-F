@@ -11,6 +11,11 @@ export const ContHeader = styled.div`
   padding: 17px;
   background-color: #000000;
 
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
   h1 {
     font-weight: 700;
     font-size: 49px;

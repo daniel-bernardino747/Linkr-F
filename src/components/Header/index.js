@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { ChevronDownOutline, ChevronUpOutline } from 'react-ionicons'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import AuthContext from '../../contexts/auth.context'
 import { logout } from '../../services/api/post.services'
@@ -39,7 +39,9 @@ export default function Header() {
   return (
     <>
       <ContHeader>
-        <h1>Linkr</h1>
+        <Link to="/">
+          <h1>Linkr</h1>
+        </Link>
         <SearchBar />
         <Menu>
           {status ? (
