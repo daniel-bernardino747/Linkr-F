@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+
 import AuthContext from '../../contexts/auth.context'
 import { postHelpers } from '../../helpers/api/posts.helpers'
 //import { user } from '../../services/api/post.services'
-export default function FormComment({ idPost }) {
+export default function FormComment(/* { idPost } */) {
   const {
     register,
     handleSubmit,
@@ -14,7 +15,7 @@ export default function FormComment({ idPost }) {
     const { comment } = data
     console.log(comment)
     try {
-      await postHelpers.comment(id, comment, user)
+      await postHelpers.comment(/* id, */ comment, user)
     } catch (error) {
       console.log(error)
     }

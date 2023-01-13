@@ -5,6 +5,7 @@ import Snippet from '../Snippet'
 import * as S from './style'
 
 export default function Timeline({ posts, active, users }) {
+  console.log(posts)
   const whoUserFollow = users.filter((user) => user.follow)
   return (
     <S.Timeline active={active}>
