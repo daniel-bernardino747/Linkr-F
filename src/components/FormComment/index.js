@@ -44,7 +44,7 @@ export default function FormComment({
     <S.ContainerFormComment onSubmit={handleSubmit(CommentSubmit)}>
       <img src={image} alt="image profile" />
       <input
-        placeholder="escreve aqui"
+        placeholder="write a comment..."
         {...register('comment', {
           required: true,
           maxLength: 300,

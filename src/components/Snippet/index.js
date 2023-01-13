@@ -90,6 +90,7 @@ export default function Snippet({
           <img src={imageCreator} alt={imageCreator} />
           <Like id={id} likes={likes} liked={userLiked} />
           <CommentsIcon
+            countComments={commentsPost.length}
             setCommentOpen={setCommentOpen}
             commentOpen={commentOpen}
           />
