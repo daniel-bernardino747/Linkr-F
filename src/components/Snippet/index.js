@@ -1,16 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
-
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
 import Comments from '../Comments'
 import CommentsIcon from '../CommentsIcon'
-
+import { Link } from 'react-router-dom'
 import EditTextPost from '../EditTextPost'
 import FormComment from '../FormComment'
 import Like from '../Like'
 import { OptionPost } from '../OptionsPost'
 import TextPost from '../TextPost'
+import { BsThreeDots } from 'react-icons/bs'
 import {
   Banner,
   ContainerComment,
@@ -31,11 +30,10 @@ export default function Snippet({
   createdBy,
   idCreator,
   userLiked,
-  idCreator,
 }) {
   const userData = localStorage.getItem('user')
   const dados = JSON.parse(userData)
-
+  const routerUser = `/users/${idCreator}`
   const { setIsOpen, setModalId } = useContext(ModalContext)
   const [urlTitle, seturlTitle] = useState(null)
   const [urlImage, seturlImage] = useState(null)
@@ -43,16 +41,18 @@ export default function Snippet({
   const [textPost, setTextPost] = useState(text)
   const [editOpen, setEditOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [optionOpen, setOptionOpen] = useState(false)
+  const [commentOpen, setCommentOpen] = useState(false)
 
-  const openEditForm = () => {
-    setEditOpen(true)
-  }
+  // const openEditForm = () => {
+  //   setEditOpen(true)
+  // }
   // const closeEditForm = () => {}
 
-  const openModal = () => {
-    setModalId(idPost)
-    setIsOpen(true)
-  }
+  // const openModal = () => {
+  //   setModalId(idPost)
+  //   setIsOpen(true)
+  // }
 
   useEffect(() => {
     metadata(url).then((res) => {
@@ -85,7 +85,7 @@ export default function Snippet({
                 textPost={textPost}
                 setTextPost={setTextPost}
                 setEditOpen={setEditOpen}
-                id={idPost}
+                id={id}
                 loading={loading}
                 setLoading={setLoading}
               />
@@ -131,7 +131,7 @@ export default function Snippet({
           <ListComments>
             <Comments />
           </ListComments>
-          <FormComment />
+          <FormComment idPost={id} idCreator={idCreator} />
         </ContainerComment>
       ) : (
         ''

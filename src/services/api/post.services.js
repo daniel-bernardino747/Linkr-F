@@ -54,3 +54,7 @@ export async function followUser(id, config) {
 export async function unfollow(id, config) {
   return api.delete(`/unfollow/${id}`, config)
 }
+
+export async function commentPost(id, data, config) {
+  return api.post(`/${id}/posts/comments`, { data }, config)
+}

@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-export default function FormComment() {
+import AuthContext from '../../contexts/auth.context'
+import { postHelpers } from '../../helpers/api/posts.helpers'
+//import { user } from '../../services/api/post.services'
+export default function FormComment({ idPost }) {
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm()
-
-  const CommentSubmit = (data) => {
-    console.log('Hello', data)
+  const { user } = useContext(AuthContext)
+  const CommentSubmit = async (data) => {
+    const { comment } = data
+    console.log(comment)
+    try {
+      await postHelpers.comment(id, comment, user)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
