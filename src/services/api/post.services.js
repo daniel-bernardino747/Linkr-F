@@ -1,6 +1,7 @@
 import { api } from './index'
 
 export async function postPublish(obj, config) {
+  console.log(obj)
   return api.post(`/posts`, obj, config)
 }
 
@@ -37,7 +38,6 @@ export async function logout(config) {
 export async function user(id, config) {
   return api.get(`/users/${id}`, config)
 }
-
 
 export async function metadata(link) {
   return api.post(`/metadata`, { link })

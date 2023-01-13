@@ -1,12 +1,17 @@
 import styled from 'styled-components'
 
+export const ContPost = styled.div`
+  width: 611px;
+  margin-bottom: 25px;
+`
+
 export const ContTimeline = styled.div`
   display: flex;
-  width: 611px;
+  width: 100%;
   height: 276px;
   background-color: #000000;
   border-radius: 20px;
-  margin-bottom: 25px;
+
   position: relative;
   h1 {
     margin-top: 20px;
@@ -150,9 +155,26 @@ export const IconsEditDelete = styled.div`
 
   position: absolute;
   top: 1.5rem;
-  right: 1.5rem;
+  right: 0.5rem;
 
   svg {
+    font-size: 1.2em;
     cursor: pointer;
   }
+`
+export const ContainerComment = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 611px;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+`
+export const ListComments = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: calc(20px);
 `

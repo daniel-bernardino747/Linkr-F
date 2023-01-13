@@ -17,4 +17,8 @@ export const ContEditTextPost = styled.form`
       border: none;
     }
   }
+  span {
+    color: #ff494b;
+    font-size: 0.8rem;
+  }
 `
