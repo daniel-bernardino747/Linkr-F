@@ -1,42 +1,34 @@
 import React, { useState } from 'react'
 
-//import Header from '../../components/Header'
-import { followUser, unfollow } from '../../../services/api/post.services'
+import { postHelpers } from '../../../helpers/api/posts.helpers'
 import * as S from './style'
 
 export default function Main({ title, follow, user, children }) {
   const [checked, setChecked] = useState(follow)
   const [loader, setLoader] = useState(false)
-  const token = localStorage.getItem('token')
-
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
 
   function Follow() {
     setLoader(true)
-    followUser(title.id, config)
-      .then((res) => {
-        setChecked(res.data)
-      })
-      .catch(() => {
-        alert('Não foi possivel executar a ação')
-      })
-    setLoader(false)
+    postHelpers.follow({ id: title.id }).then((success) => {
+      setLoader(false)
+      if (success) {
+        setChecked(success)
+        return
+      }
+      return alert('Não foi possivel executar a ação')
+    })
   }
 
   function Unfollow() {
     setLoader(true)
-    unfollow(checked.id, config)
-      .then(() => {
+    postHelpers.unfollow({ id: checked.id }).then((success) => {
+      setLoader(false)
+      if (success) {
         setChecked(null)
-      })
-      .catch(() => {
-        alert('Não foi possivel executar a ação')
-      })
-    setLoader(false)
+        return
+      }
+      return alert('Não foi possivel executar a ação')
+    })
   }
 
   return (

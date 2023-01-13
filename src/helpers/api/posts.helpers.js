@@ -1,22 +1,43 @@
+import { functionHelper } from '../../helpers/functions'
+import { getHashtag } from '../../services/api/hashtags.services'
 import {
-  hashtag,
-  likePost,
   deletePost,
-  updatePost,
-  commentPost,
-} from '../../services/api/post.services'
+  postPost,
+  postRepost,
+  putPost,
+} from '../../services/api/posts'
+import { postComments } from '../../services/api/posts/comments.services'
+import {
+  postsFollow,
+  deleteFollow,
+} from '../../services/api/posts/follows.services'
+import { postLike, postDislike } from '../../services/api/posts/likes.services'
+import { useLocalStorage } from './index'
 
-async function like({ id, token }) {
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
+async function like({ id }) {
+  const [config] = useLocalStorage()
+
   let httpResponse
   try {
-    httpResponse = await likePost(id, config)
+    httpResponse = await postLike(id, config)
   } catch (error) {
     httpResponse = error.response
+    return false
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+async function dislike({ id }) {
+  const [config] = useLocalStorage()
+
+  let httpResponse
+  try {
+    httpResponse = await postDislike(id, config)
+  } catch (error) {
+    httpResponse = error.response
+    return false
   }
   return {
     statusData: httpResponse.status,
@@ -26,60 +47,116 @@ async function like({ id, token }) {
 async function viewTag({ name }) {
   let httpResponse
   try {
-    httpResponse = await hashtag(name)
+    httpResponse = await getHashtag(name)
   } catch (error) {
     httpResponse = error.response
+    return false
   }
   return {
     statusData: httpResponse.status,
     body: httpResponse.data,
   }
 }
-
-async function del(id, token) {
+async function del({ id }) {
   let httpResponse
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
+  const [config] = useLocalStorage()
 
   try {
     httpResponse = await deletePost(id, config)
   } catch (error) {
     httpResponse = error.response
+    return false
   }
   return {
     statusData: httpResponse.status,
     body: httpResponse.data,
   }
 }
-
-export async function edit(id, data, config) {
+async function edit({ id, data }) {
   let httpResponse
+  const [config] = useLocalStorage()
 
   try {
-    httpResponse = await updatePost(id, data, config)
+    httpResponse = await putPost(id, data, config)
   } catch (error) {
     httpResponse = error.response
+    return false
   }
   return {
     statusData: httpResponse.status,
     body: httpResponse.data,
   }
 }
-
-export async function comment(id, data, token) {
+async function comment({ id, data }) {
   let httpResponse
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
+  const [config] = useLocalStorage()
+
   try {
-    httpResponse = await commentPost(id, data, config)
+    httpResponse = await postComments(id, data, config)
   } catch (error) {
     httpResponse = error.response
+    return false
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+async function sendPost({ data }) {
+  let httpResponse
+  const [config] = useLocalStorage()
+  const hashtags = functionHelper.separeHashtagsInArray(data)
+
+  try {
+    httpResponse = await postPost({ ...data, hashtags }, config)
+  } catch (error) {
+    httpResponse = error.response
+    return false
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+async function sendRepost({ id }) {
+  let httpResponse
+  const [config] = useLocalStorage()
+
+  try {
+    httpResponse = await postRepost(id, config)
+  } catch (error) {
+    httpResponse = error.response
+    return false
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+async function follow({ id }) {
+  let httpResponse
+  const [config] = useLocalStorage()
+
+  try {
+    httpResponse = await postsFollow(id, config)
+  } catch (error) {
+    httpResponse = error.response
+    return false
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+async function unfollow({ id }) {
+  let httpResponse
+  const [config] = useLocalStorage()
+
+  try {
+    httpResponse = await deleteFollow(id, config)
+  } catch (error) {
+    httpResponse = error.response
+    return false
   }
   return {
     statusData: httpResponse.status,
@@ -89,8 +166,13 @@ export async function comment(id, data, token) {
 
 export const postHelpers = {
   like,
+  dislike,
   viewTag,
   del,
   edit,
   comment,
+  sendPost,
+  sendRepost,
+  follow,
+  unfollow,
 }

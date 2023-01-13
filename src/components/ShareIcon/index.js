@@ -1,24 +1,16 @@
 import React from 'react'
 import { HiOutlineArrowPath } from 'react-icons/hi2'
 
-import { repost } from '../../services/api/post.services'
+import { postHelpers } from '../../helpers/api/posts.helpers'
 import * as s from './style'
 
 export default function Share({ count, id }) {
   if (count >= 1) {
     count--
   }
-  const token = localStorage.getItem('token')
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
 
   function repostCheck() {
-    repost(id, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+    postHelpers.sendRepost({ id })
   }
 
   return (

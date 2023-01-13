@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import AuthContext from '../../contexts/auth.context'
 import { postHelpers } from '../../helpers/api/posts.helpers'
-//import { postHelpers } from '../../helpers/api/posts.helpers'
-//import { postPublish } from '../../services/api/post.services'
-import * as s from './style'
+import * as S from './style'
 
 export default function EditTextPost({
   newText,
@@ -15,7 +12,6 @@ export default function EditTextPost({
   loading,
   setLoading,
 }) {
-  const { user } = useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -24,25 +20,21 @@ export default function EditTextPost({
   } = useForm()
 
   const watchInput = watch('edit')
-  if (watchInput) {
-    setNewText(watchInput)
-  }
 
-  const editSubmit = async (data) => {
+  if (watchInput) setNewText(watchInput)
+
+  const editSubmit = async ({ edit }) => {
     setLoading(true)
-
-    const { edit } = data
-    try {
-      await postHelpers.edit(id, edit, user)
-      setLoading(false)
-      setEditOpen(false)
-    } catch (error) {
-      console.log(error)
-    }
+    postHelpers.edit({ id, data: edit }).then((sucess) => {
+      if (sucess) {
+        setLoading(false)
+        setEditOpen(false)
+      }
+    })
   }
 
   return (
-    <s.ContEditTextPost onSubmit={handleSubmit(editSubmit)}>
+    <S.ContEditTextPost onSubmit={handleSubmit(editSubmit)}>
       <input
         type="text"
         {...register('edit', {
@@ -56,6 +48,6 @@ export default function EditTextPost({
       {errors?.edit?.type === 'maxLength' && (
         <span>*Maximum size reached !*</span>
       )}
-    </s.ContEditTextPost>
+    </S.ContEditTextPost>
   )
 }

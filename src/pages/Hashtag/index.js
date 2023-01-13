@@ -7,22 +7,16 @@ import Snippet from '../../components/Snippet'
 import Main from '../../components/Template/Main'
 import Trending from '../../components/Trending'
 import { useSearchContext } from '../../contexts/search.context'
+import { loaderHelper } from '../../helpers/api/loaders.helpers'
 import { useElementOnScreen } from '../../helpers/hooks/useElementOnScreen'
 import { api } from '../../services/api'
-import { hashtag } from '../../services/api/post.services'
 import * as S from './style'
 
 export const loader = async ({ params }) => {
   const { hashtag: name } = params
-  const token = localStorage.getItem('token')
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
-  const { data } = await hashtag(name, config)
+  const { body } = await loaderHelper.hashtag({ name })
   return {
-    ...data,
+    ...body,
     title: name,
   }
 }

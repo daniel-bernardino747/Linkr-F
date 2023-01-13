@@ -43,4 +43,17 @@ function tooltipWhoLiked(liked, likes) {
   }
 }
 
-export const functionHelper = { tooltipWhoLiked }
+function separeHashtagsInArray(data) {
+  const arrText = data.text.split(' ')
+  const hashtags = arrText
+    .map((word) => {
+      if (word[0] === '#') {
+        return word.replace(/[.,;?!#@$%&*()]/gi, '')
+      }
+      return false
+    })
+    .filter((value) => value)
+  return hashtags
+}
+
+export const functionHelper = { tooltipWhoLiked, separeHashtagsInArray }

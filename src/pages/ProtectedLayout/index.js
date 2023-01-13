@@ -1,10 +1,12 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-export default function ProtectedLayout() {
-  const token = localStorage.getItem('token')
+import { useAuthContext } from '../../contexts/auth.context'
 
-  if (!token) {
+export default function ProtectedLayout() {
+  const { signed } = useAuthContext()
+
+  if (!signed) {
     return <Navigate to="/oauth/login" />
   }
   return <Outlet />
