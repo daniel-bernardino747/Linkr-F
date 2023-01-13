@@ -79,9 +79,10 @@ export default function Home() {
     }
     const { data: newPosts } = await api.post(
       `/refresh`,
-      { datetime: firstPost.createdAt },
+      { id: firstPost.id },
       config
     )
+    console.log('new posts', newPosts)
     setRecentPosts([...newPosts])
     setActiveAnimation(false)
   }, 15000)
