@@ -2,12 +2,14 @@ import styled from 'styled-components'
 
 export const ContTimeline = styled.li`
   display: flex;
-  width: 611px;
+  width: 100%;
+  max-width: 610px;
   height: 276px;
-  background-color: #000000;
-  border-radius: 20px;
-  margin-bottom: 25px;
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 1em;
   position: relative;
+  padding: 0 1em 1em 0.5em;
+  margin-bottom: 1em;
   h1 {
     margin-top: 20px;
     font-size: 19px;
@@ -27,11 +29,11 @@ export const ContTimeline = styled.li`
 `
 
 export const ContIcons = styled.div`
-  width: 80px;
-  height: 50px;
   display: grid;
   justify-content: center;
-  margin-top: 20px;
+  width: 80px;
+  height: 50px;
+  margin: 1em 1em 1em 0.5em;
 
   img {
     width: 50px;
@@ -40,8 +42,7 @@ export const ContIcons = styled.div`
   }
 
   @media (max-width: 1024px) {
-    margin-left: 7px;
-    margin-right: 7px;
+    margin: 1em 0.5em 0.5em 0.25em;
   }
 `
 
@@ -55,84 +56,59 @@ export const Content = styled.div`
 export const Banner = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 503px;
-  height: 155px;
-  border: 1px solid #4d4d4d;
-  border-radius: 5px;
-  margin-top: 10px;
+  width: 100%;
+  max-width: 500px;
+  height: 10em;
+  border: 1px solid rgba(77, 77, 77, 1);
+  border-radius: 0.5em;
   cursor: pointer;
 
   div {
-    margin-left: 10px;
-    width: 300px;
+    padding: 0.5em 1em;
+    width: calc(100% - 12em);
   }
 
   h1 {
-    width: 250px;
-    font-size: 16px;
-    color: #cecece;
-    margin-bottom: 10px;
-    margin-right: 5px;
+    color: rgba(206, 206, 206, 1);
+    margin-bottom: 0.5em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   h2 {
-    font-size: 11px;
-    color: #9b9595;
-    margin-bottom: 10px;
-    width: 250px;
+    font-size: 0.65em;
+    color: rgba(155, 149, 149, 1);
+    margin-bottom: 1em;
+    width: 100%;
   }
 
   h3 {
-    font-size: 11px;
-    color: #cecece;
+    font-size: 0.8em;
+    color: rgba(206, 206, 206, 1);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   img {
-    height: 153px;
-    width: 153px;
-    border-left: 1px solid #4d4d4d;
-    border-radius: 5px;
+    height: 100%;
+    width: auto;
+    border-left: 0.0625em solid #4d4d4d;
+    border-radius: 0.5em;
   }
 
   @media (max-width: 1024px) {
     width: 45vw;
-    height: 140px;
-
-    div {
-      width: 250px;
-    }
-
-    img {
-      width: 140px;
-      height: 140px;
-    }
+    height: 120px;
   }
 
   @media (max-width: 860px) {
-    width: 80vw;
-    height: 120px;
-
-    div {
-      width: 450px;
-    }
-
-    img {
-      width: 120px;
-      height: 120px;
-    }
+    width: 85vw;
   }
 
   @media (max-width: 550px) {
-    h1,
-    div {
-      width: 150px;
-    }
+    width: 75vw;
 
     h2 {
       width: 150px;

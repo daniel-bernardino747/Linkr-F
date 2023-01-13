@@ -4,13 +4,17 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   padding: 5em 0;
+  width: 40em;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
 `
 export const Title = styled.h1`
   font-size: 2em;
 `
 export const Content = styled.div`
   display: flex;
-  gap: 1em;
 `
 export const ContainerTop = styled.div`
   display: flex;
@@ -19,8 +23,8 @@ export const ContainerTop = styled.div`
   padding-bottom: 1em;
 
   @media (max-width: 1024px) {
-    width: 55vw;
-    font-size: 1.5em;
+    width: 100%;
+    padding: 1em;
   }
 `
 export const UserInfo = styled.div`

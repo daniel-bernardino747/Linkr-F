@@ -72,12 +72,18 @@ export default function User() {
     <S.Container>
       <Header />
       <Main title={title} follow={follow} user={Number(idUser) !== infoUser.id}>
-        <div>
-          {posts?.map((post) => (
-            <Snippet key={post.id} {...post} username={post.name} />
-          ))}
-          <LoadingPage ref={sentinelRef} loading={loading} />
-        </div>
+        {posts.length ? (
+          <S.Content>
+            {posts?.map((post) => (
+              <Snippet key={post.id} {...post} username={post.name} />
+            ))}
+            <LoadingPage ref={sentinelRef} loading={loading} />
+          </S.Content>
+        ) : (
+          <S.Title>
+            <h1>No posts yet :(</h1>
+          </S.Title>
+        )}
         <Trending hashtagList={hashtags} />
       </Main>
     </S.Container>

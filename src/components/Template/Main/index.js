@@ -43,8 +43,16 @@ export default function Main({ title, follow, user, children }) {
     <S.Container>
       <S.ContainerTop>
         <S.UserInfo>
-          {title.image && <S.ImageUser src={title.image} alt={title.image} />}
-          <S.Title>{title.user}</S.Title>
+          {typeof title === 'string' ? (
+            <S.Title># {title}</S.Title>
+          ) : (
+            <>
+              {title.image && (
+                <S.ImageUser src={title.image} alt={title.image} />
+              )}
+              <S.Title>{title.user}</S.Title>
+            </>
+          )}
         </S.UserInfo>
         {user &&
           (checked ? (

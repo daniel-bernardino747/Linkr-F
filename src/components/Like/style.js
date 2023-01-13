@@ -44,7 +44,22 @@ export const IconHeart = styled.div`
     }
   }
 
-  @media (max-width: 1024px) {
-    width: 30px;
+  @media (max-width: 600px) {
+    height: 2.5em;
+
+    svg {
+      width: 1.325em;
+      height: 1.325em;
+
+      &:hover {
+        width: 1.225em;
+        height: 1.225em;
+      }
+
+      &:active {
+        width: 1em;
+        height: 1em;
+      }
+    }
   }
 `

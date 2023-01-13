@@ -5,8 +5,17 @@ export const Container = styled.div`
   position: relative;
   justify-content: space-between;
   align-items: center;
-  width: 30em;
+  width: clamp(10em, 50vw, 30em);
   height: 2.4em;
+
+  @media (max-width: 590px) {
+    position: absolute;
+    top: 5em;
+    left: 0;
+    width: 100%;
+    height: 2.7em;
+    padding: 0 0.5em;
+  }
 `
 export const Input = styled.input`
   z-index: 2;
@@ -40,6 +49,9 @@ export const ModalSearch = styled.div`
   a {
     text-decoration: none;
   }
+  @media (max-width: 590px) {
+    margin: 0 0.5em;
+  }
 `
 export const Scroll = styled.div`
   padding: 1.7em 1em 0.7em 1em;
@@ -53,6 +65,9 @@ export const Scroll = styled.div`
     border: 3px solid gray;
     border-radius: 20px;
     background-color: #333333;
+  }
+  @media (max-width: 600px) {
+    gap: 1em;
   }
 `
 
@@ -73,6 +88,8 @@ export const ImageUser = styled.img`
   height: 10px;
   border: 0.0625em solid #333333;
   border-radius: 1em;
+  margin-right: 0.3em;
+  margin-top: 0.3em;
 `
 export const NameUser = styled.p`
   color: black;
