@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { BsThreeDots } from 'react-icons/bs'
-//import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
@@ -27,9 +26,10 @@ export default function Snippet({
   id,
   text,
   likes,
-  imageCreator,
   url,
+  imageCreator,
   createdBy,
+  idCreator,
   userLiked,
   idCreator,
 }) {
@@ -37,16 +37,22 @@ export default function Snippet({
   const dados = JSON.parse(userData)
 
   const { setIsOpen, setModalId } = useContext(ModalContext)
-
-  const [newText, setNewText] = useState(text)
   const [urlTitle, seturlTitle] = useState(null)
   const [urlImage, seturlImage] = useState(null)
   const [urlDescription, seturlDescription] = useState(null)
+  const [textPost, setTextPost] = useState(text)
   const [editOpen, setEditOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [optionOpen, setOptionOpen] = useState(false)
-  const [commentOpen, setCommentOpen] = useState(false)
+
+  const openEditForm = () => {
+    setEditOpen(true)
+  }
   // const closeEditForm = () => {}
+
+  const openModal = () => {
+    setModalId(idPost)
+    setIsOpen(true)
+  }
 
   useEffect(() => {
     metadata(url).then((res) => {
@@ -70,18 +76,21 @@ export default function Snippet({
         </ContIcons>
         <div>
           <Content>
-            <h1>{createdBy}</h1>
+            <Link style={{ textDecoration: 'none' }} to={routerUser}>
+              <h1>{createdBy}</h1>
+            </Link>
             {editOpen ? (
               <EditTextPost
-                newText={newText}
-                setNewText={setNewText}
-                id={id}
+                text={text}
+                textPost={textPost}
+                setTextPost={setTextPost}
+                setEditOpen={setEditOpen}
+                id={idPost}
                 loading={loading}
                 setLoading={setLoading}
-                setEditOpen={setEditOpen}
               />
             ) : (
-              <TextPost text={newText} />
+              <TextPost text={text} />
             )}
           </Content>
           <Banner onClick={() => window.open(url)}>
@@ -93,7 +102,6 @@ export default function Snippet({
             <img src={urlImage} alt={urlImage} />
           </Banner>
         </div>
-
         {optionOpen ? (
           <OptionPost
             setIsOpen={setIsOpen}

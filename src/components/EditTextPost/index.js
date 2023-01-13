@@ -1,10 +1,10 @@
-import * as s from './style'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { postHelpers } from '../../helpers/api/posts.helpers'
 //import { postHelpers } from '../../helpers/api/posts.helpers'
 import AuthContext from '../../contexts/auth.context'
 //import { postPublish } from '../../services/api/post.services'
+import * as s from './style'
 
 export default function EditTextPost({
   newText,
