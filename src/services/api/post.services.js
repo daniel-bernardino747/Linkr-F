@@ -58,3 +58,7 @@ export async function unfollow(id, config) {
 export async function commentPost(id, data, config) {
   return api.post(`/${id}/posts/comments`, { data }, config)
 }
+
+export async function repost(id, config) {
+  return api.post(`/repost/${id}`, {}, config)
+}
