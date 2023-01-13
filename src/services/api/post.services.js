@@ -1,6 +1,7 @@
 import { api } from './index'
 
 export async function postPublish(obj, config) {
+  console.log(obj)
   return api.post(`/posts`, obj, config)
 }
 
@@ -52,4 +53,8 @@ export async function followUser(id, config) {
 
 export async function unfollow(id, config) {
   return api.delete(`/unfollow/${id}`, config)
+}
+
+export async function commentPost(id, data, config) {
+  return api.post(`/${id}/posts/comments`, { data }, config)
 }

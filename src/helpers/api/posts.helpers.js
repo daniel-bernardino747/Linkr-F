@@ -3,6 +3,7 @@ import {
   likePost,
   deletePost,
   updatePost,
+  commentPost,
 } from '../../services/api/post.services'
 
 async function like({ id, token }) {
@@ -68,9 +69,28 @@ export async function edit(id, data, config) {
   }
 }
 
+export async function comment(id, data, token) {
+  let httpResponse
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  }
+  try {
+    httpResponse = await commentPost(id, data, config)
+  } catch (error) {
+    httpResponse = error.response
+  }
+  return {
+    statusData: httpResponse.status,
+    body: httpResponse.data,
+  }
+}
+
 export const postHelpers = {
   like,
   viewTag,
   del,
   edit,
+  comment,
 }
