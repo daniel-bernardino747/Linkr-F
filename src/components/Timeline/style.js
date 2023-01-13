@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Title = styled.h1`
   font-size: 38px;
+  width: 611px;
   color: white;
 
   @media (max-width: 1024px) {
