@@ -37,6 +37,7 @@ export default function User() {
   const { title, posts: apiPosts, hashtags, users, follow } = useLoaderData()
   const { searchResults, setSearchResults } = useSearchContext()
   const { id: idUser } = useParams()
+  let infoUser = JSON.parse(localStorage.getItem('user'))
 
   const [currentPage, setCurrentPage] = useState(1)
   const [posts, setPosts] = useState(apiPosts)
@@ -49,7 +50,7 @@ export default function User() {
   useEffect(() => {
     setSearchResults({ ...searchResults, original: users })
     if (currentPage !== 1) {
-      ;(async () => {
+      ; (async () => {
         const token = localStorage.getItem('token')
         const config = {
           headers: {
@@ -70,7 +71,7 @@ export default function User() {
   return (
     <S.Container>
       <Header />
-      <Main title={title} follow={follow} user>
+      <Main title={title} follow={follow} user={Number(idUser) !== infoUser.id}>
         <div>
           {posts?.map((post) => (
             <Snippet key={post.id} {...post} username={post.name} />
