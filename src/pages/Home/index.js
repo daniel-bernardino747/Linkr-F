@@ -79,9 +79,10 @@ export default function Home() {
     }
     const { data: newPosts } = await api.post(
       `/refresh`,
-      { datetime: firstPost.createdAt },
+      { id: firstPost.id },
       config
     )
+    console.log('new posts', newPosts)
     setRecentPosts([...newPosts])
     setActiveAnimation(false)
   }, 15000)
@@ -107,7 +108,7 @@ export default function Home() {
               {recentPosts.length} new posts, load more! ⟳
             </S.messageNewPosts>
           )}
-          <Timeline posts={posts} active={activeAnimation} />
+          <Timeline posts={posts} active={activeAnimation} users={users} />
           <LoadingPage ref={sentinelRef} loading={loading} />
         </div>
         <Trending hashtagList={hashtags} />

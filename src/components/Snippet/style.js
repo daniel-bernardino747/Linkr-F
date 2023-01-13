@@ -4,13 +4,12 @@ export const ContPost = styled.div`
   width: 611px;
   margin-bottom: 25px;
 `
-
 export const ContTimeline = styled.div`
   display: flex;
   width: 100%;
   height: 276px;
   background-color: #000000;
-  border-radius: 20px;
+  border-radius: 0px 0px 20px 20px;
 
   position: relative;
   h1 {
@@ -28,6 +27,32 @@ export const ContTimeline = styled.div`
     border-radius: 0;
     width: 100vw;
     height: 240px;
+  }
+`
+export const ContShare = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: #1E1E1E;
+  border-radius: 20px 20px 0px 0px;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+
+  h1 {
+    font-family: 'Lato';
+    font-style: normal;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    
+  }
+  p {
+    font-family: 'Lato';
+    font-style: normal;
+    color: #ffffff;
+    margin: 0px 10px 0px 15px;
+    font-weight: 400;
+    font-size: 16px;
   }
 `
 

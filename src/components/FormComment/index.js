@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+
 import AuthContext from '../../contexts/auth.context'
 import { postHelpers } from '../../helpers/api/posts.helpers'
 import * as S from './style'

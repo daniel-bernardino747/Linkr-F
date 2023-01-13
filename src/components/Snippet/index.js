@@ -1,15 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { BsThreeDots } from 'react-icons/bs'
+import { HiOutlineArrowPath } from 'react-icons/hi2'
+import { Link } from 'react-router-dom'
 import ModalContext from '../../contexts/modal.context'
 import { metadata } from '../../services/api/post.services'
 import Comments from '../Comments'
 import CommentsIcon from '../CommentsIcon'
-import { Link } from 'react-router-dom'
 import EditTextPost from '../EditTextPost'
 import FormComment from '../FormComment'
 import Like from '../Like'
 import { OptionPost } from '../OptionsPost'
+import Share from '../ShareIcon/index'
 import TextPost from '../TextPost'
-import { BsThreeDots } from 'react-icons/bs'
 import {
   Banner,
   ContainerComment,
@@ -19,6 +21,7 @@ import {
   ContTimeline,
   IconsEditDelete,
   ListComments,
+  ContShare,
 } from './style'
 
 export default function Snippet({
@@ -31,6 +34,9 @@ export default function Snippet({
   idCreator,
   userLiked,
   comments,
+  repostsName,
+  repostsId,
+  count,
 }) {
   const userData = localStorage.getItem('user')
   const dados = JSON.parse(userData)
@@ -68,6 +74,17 @@ export default function Snippet({
 
   return (
     <ContPost>
+      {repostsId !== null && (
+        <>
+          {repostsId !== idCreator && (
+            <ContShare>
+              <HiOutlineArrowPath />
+              <p>Re-posted by</p>
+              <h1>{repostsName}</h1>
+            </ContShare>
+          )}
+        </>
+      )}
       <ContTimeline>
         <ContIcons>
           <img src={imageCreator} alt={imageCreator} />
@@ -76,6 +93,7 @@ export default function Snippet({
             setCommentOpen={setCommentOpen}
             commentOpen={commentOpen}
           />
+          <Share count={count} id={id} />
         </ContIcons>
         <div>
           <Content>
