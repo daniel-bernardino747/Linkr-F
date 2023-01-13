@@ -4,14 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { isEmail } from 'validator'
 
-import { signup, signin } from '../../services/api/post.services'
-import {
-  ContainerAuthForm,
-  InputCamp,
-  ButtonCamp,
-  TextError,
-  Text,
-} from './style'
+import { authHelper } from '../../helpers/api/auth.helpers'
+import * as S from './style'
 
 export default function AuthForm({ signUp }) {
   const navigate = useNavigate()
@@ -26,38 +20,22 @@ export default function AuthForm({ signUp }) {
   function onSubmit(data) {
     return new Promise((resolve) => {
       if (typeForm) {
-        signup(data)
-          .then((sucess) => {
-            if (sucess) {
-              navigate('/oauth/login')
-            }
-            resolve()
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        authHelper.register({ data }).then((sucess) => {
+          if (sucess) navigate('/oauth/login')
+          resolve()
+        })
       } else {
-        signin(data)
-          .then((sucess) => {
-            if (sucess) {
-              const user = JSON.stringify(sucess.data.user)
-              localStorage.setItem('token', sucess.data.token)
-              localStorage.setItem('user', user)
-
-              navigate('/')
-            }
-            resolve()
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        authHelper.login({ data }).then((sucess) => {
+          if (sucess) navigate('/')
+          resolve()
+        })
       }
     })
   }
 
   return (
-    <ContainerAuthForm onSubmit={handleSubmit(onSubmit)}>
-      <InputCamp
+    <S.ContainerAuthForm onSubmit={handleSubmit(onSubmit)}>
+      <S.InputCamp
         type="text"
         placeholder="e-mail"
         {...register('email', {
@@ -66,66 +44,66 @@ export default function AuthForm({ signUp }) {
         })}
       />
       {errors?.email?.type === 'required' && (
-        <TextError>Email is required.</TextError>
+        <S.TextError>Email is required.</S.TextError>
       )}
       {errors?.email?.type === 'validate' && (
-        <TextError>Email is invalid.</TextError>
+        <S.TextError>Email is invalid.</S.TextError>
       )}
 
-      <InputCamp
+      <S.InputCamp
         type="text"
         placeholder="password"
         {...register('password', { required: true, minLength: 3 })}
       />
       {errors?.password?.type === 'required' && (
-        <TextError>Password is required.</TextError>
+        <S.TextError>Password is required.</S.TextError>
       )}
       {errors?.password?.type === 'minLength' && (
-        <TextError>Password must have at least 3 characters.</TextError>
+        <S.TextError>Password must have at least 3 characters.</S.TextError>
       )}
 
       {typeForm && (
         <>
-          <InputCamp
+          <S.InputCamp
             type="text"
             placeholder="username"
             {...register('name', { required: true })}
           />
           {errors?.name?.type === 'required' && (
-            <TextError>Name is required.</TextError>
+            <S.TextError>Name is required.</S.TextError>
           )}
         </>
       )}
 
       {typeForm && (
         <>
-          <InputCamp
+          <S.InputCamp
             type="text"
             placeholder="picture url"
             {...register('image', { required: true })}
           />
           {errors?.image?.type === 'required' && (
-            <TextError>Picture url is required.</TextError>
+            <S.TextError>Picture url is required.</S.TextError>
           )}
         </>
       )}
 
-      <ButtonCamp
+      <S.ButtonCamp
         disabled={isSubmitting}
         value={isSubmitting ? 'Carregando...' : notSubmitting}
       />
 
       {!typeForm && (
         <Link style={{ textDecoration: 'none' }} to="/oauth/register">
-          <Text>First time? Create an account!</Text>
+          <S.Text>First time? Create an account!</S.Text>
         </Link>
       )}
 
       {typeForm && (
         <Link style={{ textDecoration: 'none' }} to="/oauth/login">
-          <Text>Switch back to log in</Text>
+          <S.Text>Switch back to log in</S.Text>
         </Link>
       )}
-    </ContainerAuthForm>
+    </S.ContainerAuthForm>
   )
 }

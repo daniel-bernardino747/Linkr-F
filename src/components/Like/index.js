@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import 'react-tooltip/dist/react-tooltip.css'
 
+import 'react-tooltip/dist/react-tooltip.css'
+import { postHelpers } from '../../helpers/api/posts.helpers'
 import { functionHelper } from '../../helpers/functions'
-import { dislikePost, likePost } from '../../services/api/post.services'
 import * as S from './style'
 
 export default function Like({ id, likes, liked }) {
@@ -14,33 +14,22 @@ export default function Like({ id, likes, liked }) {
   const whoLiked = functionHelper.tooltipWhoLiked(liked, likes)
 
   const handleLike = async () => {
-    const token = localStorage.getItem('token')
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    }
     if (checked) {
       setChecked(false)
-      try {
-        await dislikePost(id, config)
-        setChecked(false)
-        setLikesLength(likesLength - 1)
-      } catch (error) {
-        setChecked(true)
-        console.log(error)
-      }
+      postHelpers.dislike({ id }).then((success) => {
+        if (success) {
+          setChecked(false)
+          setLikesLength(likesLength - 1)
+        }
+      })
     } else {
       setChecked(true)
-      try {
-        await likePost(id, config)
-        setChecked(true)
-        setLikesLength(likesLength + 1)
-        console.log('curti')
-      } catch (error) {
-        setChecked(false)
-        console.log(error)
-      }
+      postHelpers.like({ id }).then((success) => {
+        if (success) {
+          setChecked(true)
+          setLikesLength(likesLength + 1)
+        }
+      })
     }
   }
 

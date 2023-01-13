@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-
-
 export const Comment = styled.li`
   width: 90%;
   display: flex;

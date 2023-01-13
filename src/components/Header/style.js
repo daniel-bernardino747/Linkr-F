@@ -1,20 +1,25 @@
 import styled from 'styled-components'
 
 export const ContHeader = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
   width: 100vw;
   height: 72px;
-  background-color: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
   padding: 17px;
-  position: relative;
+  background-color: #000000;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 
   h1 {
-    font-family: 'Passion One', cursive;
-    font-size: 49px;
     font-weight: 700;
+    font-size: 49px;
+    font-family: 'Passion One', cursive;
   }
 
   img {
@@ -28,18 +33,19 @@ export const Menu = styled.div`
   align-items: center;
 `
 export const Opitions = styled.div`
+  display: flex;
+  z-index: 2;
   position: absolute;
   top: 72px;
   right: 0;
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 47px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000000;
   border-radius: 0px 0px 0px 20px;
-  font-family: 'Lato', sans-serif;
+  color: #ffffff;
   font-weight: 700;
   font-size: 17px;
-  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  background-color: #000000;
 `

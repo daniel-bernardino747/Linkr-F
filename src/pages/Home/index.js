@@ -10,29 +10,26 @@ import Main from '../../components/Template/Main'
 import Timeline from '../../components/Timeline'
 import Trending from '../../components/Trending'
 import { useSearchContext } from '../../contexts/search.context'
+import { useLocalStorage } from '../../helpers/api'
+import { loaderHelper } from '../../helpers/api/loaders.helpers'
 import { useElementOnScreen } from '../../helpers/hooks/useElementOnScreen'
 import { api } from '../../services/api'
+import { getPosts } from '../../services/api/posts'
 import * as S from './style'
 
 export const loader = async () => {
-  const token = localStorage.getItem('token')
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
   try {
-    const { data } = await api.get('/posts?page=1', config)
+    const [config] = useLocalStorage()
+    const { data } = await getPosts(1, config)
     return data
   } catch (error) {
-    console.log(error)
     const confirm = window.alert(
       'An error occured while trying to fetch the posts, please refresh the page'
     )
     if (confirm) {
-      window.location.reload()
+      return window.location.reload()
     }
-    return error
+    return null
   }
 }
 
@@ -55,14 +52,8 @@ export default function Home() {
     setSearchResults({ ...searchResults, original: users })
     if (currentPage !== 1) {
       ;(async () => {
-        const token = localStorage.getItem('token')
-        const config = {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        }
-        const { data } = await api.get(`/posts?page=${currentPage}`, config)
-        const newPosts = data.posts
+        const { body } = await loaderHelper.timeline({ page: currentPage })
+        const newPosts = body.posts
         setPosts((currentPosts) => [...currentPosts, ...newPosts])
         loading.set(false)
       })()
@@ -82,7 +73,6 @@ export default function Home() {
       { id: firstPost.id },
       config
     )
-    console.log('new posts', newPosts)
     setRecentPosts([...newPosts])
     setActiveAnimation(false)
   }, 15000)

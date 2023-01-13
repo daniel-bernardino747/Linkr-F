@@ -1,13 +1,13 @@
-import * as s from './style'
 import React from 'react'
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
+
+import * as s from './style'
 
 export function OptionPost({
   setModalId,
   setEditOpen,
   setIsOpen,
   id,
-  //backdropClose = false,
   idModal = 'modal',
   setOptionOpen,
 }) {
@@ -25,7 +25,6 @@ export function OptionPost({
   const handleBackdropClick = (e) => {
     e.stopPropagation()
     if (e) e.preventDefault()
-
     if (e.target.idModal === idModal) return
     setOptionOpen(false)
   }

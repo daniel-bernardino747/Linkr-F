@@ -1,43 +1,26 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
-
-import AuthContext from '../../contexts/auth.context'
-import { postHelpers } from '../../helpers/api/posts.helpers'
-import * as S from './style'
 import { IoPaperPlaneOutline } from 'react-icons/io5'
 
-//import { user } from '../../services/api/post.services'
+import { postHelpers } from '../../helpers/api/posts.helpers'
+import * as S from './style'
+
 export default function FormComment({
   idPost,
   idCreator,
   dados,
   setCommentsPost,
 }) {
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm()
+  const { register, handleSubmit } = useForm()
   const { id, name, image } = dados
-  const { user } = useContext(AuthContext)
 
-  const CommentSubmit = async (data) => {
-    const { comment } = data
-    const body = { comment, idCreator, id, name, image }
-    const newArray = [
-      {
-        id,
-        image,
-        user: name,
-        comment,
-      },
-    ]
-    try {
-      await postHelpers.comment(idPost, body, user)
-      setCommentsPost((comment) => [...comment, ...newArray])
-    } catch (error) {
-      console.log(error)
-    }
+  const CommentSubmit = async ({ comment }) => {
+    const data = { comment, idCreator, id, name, image }
+    const newArray = [{ id, image, user: name, comment }]
+
+    postHelpers.comment({ id: idPost, data }).then((success) => {
+      if (success) setCommentsPost((comment) => [...comment, ...newArray])
+    })
   }
 
   return (

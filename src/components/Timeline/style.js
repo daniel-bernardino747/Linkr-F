@@ -1,15 +1,24 @@
 import styled, { css } from 'styled-components'
 
 export const Title = styled.h1`
-  font-size: 38px;
-  width: 611px;
+  font-size: 2.5em;
+
   color: white;
 
   @media (max-width: 1024px) {
-    font-size: 24px;
+    font-size: 1.8em;
+  }
+  @media (max-width: 860px) {
+    padding: 1em 0.5em;
+    font-size: 2em;
   }
 `
 export const Timeline = styled.div`
+  h1 {
+    margin-bottom: 1em;
+    width: 100%;
+    max-width: 610px;
+  }
   li:first-child {
     ${(props) =>
       props.active

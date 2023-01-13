@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import { HiOutlineArrowPath } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
-import ModalContext from '../../contexts/modal.context'
-import { metadata } from '../../services/api/post.services'
+
+import { useModalContext } from '../../contexts/modal.context'
+import { postMetadata } from '../../services/api/posts/metadata.services'
 import Comments from '../Comments'
 import CommentsIcon from '../CommentsIcon'
 import EditTextPost from '../EditTextPost'
@@ -12,17 +13,7 @@ import Like from '../Like'
 import { OptionPost } from '../OptionsPost'
 import Share from '../ShareIcon/index'
 import TextPost from '../TextPost'
-import {
-  Banner,
-  ContainerComment,
-  Content,
-  ContIcons,
-  ContPost,
-  ContTimeline,
-  IconsEditDelete,
-  ListComments,
-  ContShare,
-} from './style'
+import * as S from './style'
 
 export default function Snippet({
   id,
@@ -41,7 +32,7 @@ export default function Snippet({
   const userData = localStorage.getItem('user')
   const dados = JSON.parse(userData)
   const routerUser = `/users/${idCreator}`
-  const { setIsOpen, setModalId } = useContext(ModalContext)
+  const { modal } = useModalContext()
   const [urlTitle, seturlTitle] = useState(null)
   const [urlImage, seturlImage] = useState(null)
   const [urlDescription, seturlDescription] = useState(null)
@@ -51,20 +42,9 @@ export default function Snippet({
   const [optionOpen, setOptionOpen] = useState(false)
   const [commentOpen, setCommentOpen] = useState(false)
   const [commentsPost, setCommentsPost] = useState(comments)
-  //const ficComments = []
-
-  // const openEditForm = () => {
-  //   setEditOpen(true)
-  // }
-  // const closeEditForm = () => {}
-
-  // const openModal = () => {
-  //   setModalId(idPost)
-  //   setIsOpen(true)
-  // }
 
   useEffect(() => {
-    metadata(url).then((res) => {
+    postMetadata(url).then((res) => {
       seturlTitle(res.data.urlTitle)
       seturlImage(res.data.urlImage)
       seturlDescription(res.data.urlDescription)
@@ -73,31 +53,31 @@ export default function Snippet({
   }, [])
 
   return (
-    <ContPost>
+    <S.ContPost>
       {repostsId !== null && (
         <>
           {repostsId !== idCreator && (
-            <ContShare>
+            <S.ContShare>
               <HiOutlineArrowPath />
               <p>Re-posted by</p>
               <h1>{repostsName}</h1>
-            </ContShare>
+            </S.ContShare>
           )}
         </>
       )}
-      <ContTimeline>
-        <ContIcons>
+      <S.ContTimeline>
+        <S.ContIcons>
           <img src={imageCreator} alt={imageCreator} />
           <Like id={id} likes={likes} liked={userLiked} />
           <CommentsIcon
-            countComments={commentsPost.length}
+            countComments={commentsPost?.length}
             setCommentOpen={setCommentOpen}
             commentOpen={commentOpen}
           />
           <Share count={count} id={id} />
-        </ContIcons>
+        </S.ContIcons>
         <div>
-          <Content>
+          <S.Content>
             <Link style={{ textDecoration: 'none' }} to={routerUser}>
               <h1>{createdBy}</h1>
             </Link>
@@ -114,20 +94,20 @@ export default function Snippet({
             ) : (
               <TextPost text={text} />
             )}
-          </Content>
-          <Banner onClick={() => window.open(url)}>
+          </S.Content>
+          <S.Banner onClick={() => window.open(url)}>
             <div>
               <h1>{urlTitle}</h1>
               <h2>{urlDescription}</h2>
               <h3>{url}</h3>
             </div>
             <img src={urlImage} alt={urlImage} />
-          </Banner>
+          </S.Banner>
         </div>
         {optionOpen ? (
           <OptionPost
-            setIsOpen={setIsOpen}
-            setModalId={setModalId}
+            setIsOpen={modal.status}
+            setModalId={modal.id}
             setEditOpen={setEditOpen}
             id={id}
             backdropClose={true}
@@ -137,24 +117,24 @@ export default function Snippet({
           ''
         )}
         {dados.id === idCreator ? (
-          <IconsEditDelete>
+          <S.IconsEditDelete>
             <BsThreeDots
               onClick={() => {
                 setOptionOpen(true)
               }}
             />
-          </IconsEditDelete>
+          </S.IconsEditDelete>
         ) : (
           ''
         )}
-      </ContTimeline>
+      </S.ContTimeline>
       {commentOpen ? (
-        <ContainerComment>
-          <ListComments>
-            {commentsPost.map((comment, id) => (
+        <S.ContainerComment>
+          <S.ListComments>
+            {commentsPost?.map((comment, id) => (
               <Comments key={id} {...comment} idCreator={idCreator} />
             ))}
-          </ListComments>
+          </S.ListComments>
           <FormComment
             idPost={id}
             idCreator={idCreator}
@@ -162,10 +142,10 @@ export default function Snippet({
             comments={comments}
             setCommentsPost={setCommentsPost}
           />
-        </ContainerComment>
+        </S.ContainerComment>
       ) : (
         ''
       )}
-    </ContPost>
+    </S.ContPost>
   )
 }

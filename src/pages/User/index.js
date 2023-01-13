@@ -7,28 +7,22 @@ import Snippet from '../../components/Snippet'
 import Main from '../../components/Template/Main'
 import Trending from '../../components/Trending'
 import { useSearchContext } from '../../contexts/search.context'
+import { loaderHelper } from '../../helpers/api/loaders.helpers'
 import { useElementOnScreen } from '../../helpers/hooks/useElementOnScreen'
 import { api } from '../../services/api'
-import { user } from '../../services/api/post.services'
 import * as S from './style'
 
 export const loader = async ({ params }) => {
   const { id } = params
-  const token = localStorage.getItem('token')
-  const config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
-  const { data } = await user(id, config)
-  console.log(data.posts)
+  const { body } = await loaderHelper.user({ id })
+  console.log(body)
 
   return {
-    ...data,
+    ...body,
     title: {
-      user: `${data.user.name}'s posts`,
-      image: data.user.image,
-      id: data.user.id,
+      user: `${body.user.name}'s posts`,
+      image: body.user.image,
+      id: body.user.id,
     },
   }
 }
@@ -72,12 +66,18 @@ export default function User() {
     <S.Container>
       <Header />
       <Main title={title} follow={follow} user={Number(idUser) !== infoUser.id}>
-        <div>
-          {posts?.map((post) => (
-            <Snippet key={post.id} {...post} username={post.name} />
-          ))}
-          <LoadingPage ref={sentinelRef} loading={loading} />
-        </div>
+        {posts.length ? (
+          <S.Content>
+            {posts?.map((post) => (
+              <Snippet key={post.id} {...post} username={post.name} />
+            ))}
+            <LoadingPage ref={sentinelRef} loading={loading} />
+          </S.Content>
+        ) : (
+          <S.Title>
+            <h1>No posts yet :(</h1>
+          </S.Title>
+        )}
         <Trending hashtagList={hashtags} />
       </Main>
     </S.Container>

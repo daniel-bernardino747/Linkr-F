@@ -1,5 +1,6 @@
 import React from 'react'
 import { BsChatDots } from 'react-icons/bs'
+
 import * as s from './style'
 
 export default function Comments({

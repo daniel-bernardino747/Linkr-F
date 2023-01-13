@@ -17,9 +17,9 @@ export const IconComment = styled.div`
     width: 1.825em;
     height: 1.825em;
     /* fill: ${(props) =>
-    props.checked
-      ? props.theme.colors.buttons.liked
-      : props.theme.colors.buttons.disliked}; */
+      props.checked
+        ? props.theme.colors.buttons.liked
+        : props.theme.colors.buttons.disliked}; */
 
     &:hover {
       opacity: 0.8;
@@ -32,9 +32,9 @@ export const IconComment = styled.div`
       width: 1.5em;
       height: 1.5em;
       /* fill: ${(props) =>
-    props.checked
-      ? props.theme.colors.buttons.disliked
-      : props.theme.colors.buttons.liked}; */
+        props.checked
+          ? props.theme.colors.buttons.disliked
+          : props.theme.colors.buttons.liked}; */
     }
   }
 `
