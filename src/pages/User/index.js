@@ -50,7 +50,7 @@ export default function User() {
   useEffect(() => {
     setSearchResults({ ...searchResults, original: users })
     if (currentPage !== 1) {
-      ; (async () => {
+      ;(async () => {
         const token = localStorage.getItem('token')
         const config = {
           headers: {

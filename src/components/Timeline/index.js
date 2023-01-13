@@ -1,17 +1,24 @@
 import React from 'react'
-import { LineWave } from 'react-loader-spinner'
 
 import ModalComponent from '../Modal'
 import Snippet from '../Snippet'
 import * as S from './style'
 
-export default function Timeline({ posts, loading, active }) {
+export default function Timeline({ posts, active, users }) {
+  const whoUserFollow = users.filter((user) => user.follow)
   return (
     <S.Timeline active={active}>
-      {posts.length === 0 && !loading && (
-        <S.Title>There are no posts yet</S.Title>
+      {posts.length === 0 && (
+        <>
+          {whoUserFollow.length !== 0 ? (
+            <S.Title>No posts found from your friends</S.Title>
+          ) : (
+            <S.Title>
+              You don{"'"}t follow anyone yet. Search for new friends!
+            </S.Title>
+          )}
+        </>
       )}
-      {loading && <LineWave color="white" />}
       <ul>
         {posts?.map((post, i) => (
           <Snippet key={post.id ** i * i} {...post} />
